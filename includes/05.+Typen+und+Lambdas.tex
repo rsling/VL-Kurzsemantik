@@ -1,0 +1,1426 @@
+\begin{frame}
+  {Kernfragen in dieser Woche}
+  \onslide<+->
+  \onslide<+->
+  \centering 
+  \Large
+  Wie modelliert man natürliche Sprache als Prädikatenlogik?\\
+  \onslide<+->
+  \Halbzeile
+  Wozu braucht man \alert{Quantorenbewegung (LF)} in GB-Ansätzen?\\
+  \onslide<+->
+  \Halbzeile
+  Wie sieht eine ausbuchstabierte \alert{Modelltheorie} aus?\\
+  Und wie werden Quantoren und Variablen modelltheoretisch interpretiert?\\
+  \onslide<+->
+  \Halbzeile
+  \grau{\footnotesize Text für heute: \citet[Kapitel~3]{ChierchiaMcconnellginet2000}}
+\end{frame}
+
+\section{Von Prädikatenlogik zu natürlicher Sprache}
+
+\begin{frame}
+  {Zur Erinnerung}
+  \onslide<+->
+  \onslide<+->
+  Semantik von Fragment F1\\
+  \Halbzeile
+  \begin{itemize}[<+->]
+    \item Namen referieren auf \alert{spezifische Individuen}
+    \item intransitive Verben referieren auf \alert{Mengen von Individuen}
+    \item mehrstellige Verben referieren auf Mengen von \alert{Tupeln von Individuen}
+    \item Sätze referieren auf \alert{Wahrheitswerte}!
+      \Halbzeile
+    \item F2 | Integration von Erkenntnissen aus Prädikatenlogik
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  {Das Problem mit Pronomina}
+  \onslide<+->
+  \onslide<+->
+  Wie situationsabhängige Namen\\
+  \Halbzeile
+  \begin{itemize}[<+->]
+    \item[ ] \textit{\alert{This} is red.}
+    \item Pronomen \alert{\textit{this}} | syntaktisch eine NP
+    \item \ldots\ und referiert auf \alert{ein spezifisches Objekt} (wie Namen)\\
+      \grau{\footnotesize keine Quantifikation bzw. Mengenreferenz}
+      \Halbzeile
+    \item Aber \orongsch{nur in gegebener Situation interpretierbar}\\
+      \grau{\footnotesize Deixis, im Text auch Anaphorik}
+    \item Kein Äquivalent in klassischer Logik
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  {Pronomina und Variablen}
+  \onslide<+->
+  \onslide<+->
+  Ähnlichkeit von Variablen und Pronominalausdrücken\\
+  \Halbzeile
+  \begin{itemize}[<+->]
+    \item Rumpf einer quantifizierten Wff | Wff $P(x)$ aus Wff $(\forall x)Px$
+    \item Ungebundenes $x$ in $P(x)$ \alert{ähnlich wie Pronominalbedeutung}\\
+      \grau{\footnotesize Externe Interpretationsvorschrift erforderlich}
+    \Halbzeile
+  \item Quantoren | Auswertungsalgorithmus\\
+    \grau{\footnotesize Für alle möglichen belegungen von $x$, $P(x)$}
+  \item Pronomina | Kontextuelle Auswertung\\
+    \grau{\footnotesize Belegung für $x$ im gegebenen Kontext}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  {Prädikatenlogik | Syntax}
+  \onslide<+->
+  \onslide<+->
+  Als Vorüberlegung | Prädikatenlogik als \alert{Phrasenstrukturgrammatik}\\
+  \Halbzeile
+  \begin{itemize}[<+->]
+    \item[ ] $a\ \rightarrow\ const, var$ \grau{| Individuenausdrücke}
+    \item[ ] $conn\ \rightarrow\ \wedge,\vee,\rightarrow,\leftrightarrow$ \grau{| Funktoren}
+    \item[ ] $neg\ \rightarrow\ \neg$ \grau{| Negation}
+    \item[ ] $Q\ \rightarrow\ \exists,\forall$ \grau{| nur zwei Quantoren}
+    \item[ ] $pred^1\ \rightarrow\ P, Q$ \grau{| einstellige Prädikate}
+    \item[ ] $pred^2\ \rightarrow\ R$ \grau{| zweistellige Prädikate}
+    \item[ ] $pred^3\ \rightarrow\ S$ \grau{| dreistellige Prädikate}
+    \item[ ] $const\ \rightarrow\ b, c$ \grau{| nur zwei Individenkonstanten}
+    \item[ ] $var\ \rightarrow\ x_1,x_2,\cdots x_n$ \grau{| beliebig viele Variablen}
+      \Halbzeile
+    \item \grau{Die Formalisierung ist äquivalent zur mengenbasierten von letzter Woche!}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  {Prädikatenlogik | PS-Regeln}
+  \onslide<+->
+  \onslide<+->
+  Wir nehmen eine \alert{Prädikatsnotation ohne Klammern} | $Px$ statt $P(x)$ usw.\\
+  \Halbzeile
+  \begin{itemize}[<+->]
+    \item $wff\rightarrow pred^1\ a_1\ldots\ a_n$ \grau{| n-stellige Prädikate und ihre Argumente}
+    \item $wff\rightarrow neg\ wff$ \grau{| Applikation von Negation auf Wffs}
+    \item $wff\rightarrow wff\ conn\ wff$ \grau{| Applikation von anderen Funktoren auf Wffs}
+    \item $wff\rightarrow Q\ var\ wff$ \grau{| Quantifikation}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  {Eine Wff ohne Quantoren}
+  \onslide<+->
+  \onslide<+->
+  Zum Beispiel: \textit{Ben ($b$) paddelt ($P$) und ($\wedge$) Ben rudert ($R$) nicht ($\neg$) mit Chris ($c$).}\\
+  In PL: \alert{$Pb\wedge\neg Rbc$}\\
+  \onslide<+->
+  \Zeile
+  \centering
+  \scalebox{0.8}{\begin{forest}
+    [$wff$, calign=child, calign child=2
+      [$wff$
+        [$pred^1$
+          [$P$]
+        ]
+        [$a$
+          [$const$
+            [$b$]
+          ]
+        ]
+      ]
+      [$conn$
+        [$\wedge$]
+      ]
+      [$wff$
+        [$\neg$]
+        [$wff$, calign=child, calign child=2
+          [$pred^2$
+            [$R$]
+          ]
+          [$a$
+            [$const$
+              [$b$]
+            ]
+          ]
+          [$a$
+            [$const$
+              [$c$]
+            ]
+          ]
+        ]
+      ]
+    ]
+  \end{forest}}
+\end{frame}
+
+\begin{frame}
+  {Eine Wff mit Quantoren}
+  \onslide<+->
+  \onslide<+->
+  Zum Beispiel: \textit{Als Paddler hat man immer jemanden, mit dem man nicht rudert.}\\
+  In PL: \alert{$\forall x_1[Px_1\rightarrow\exists x_2\neg Px_1x_2]$}\\
+  \onslide<+->
+  \Halbzeile
+  \centering
+  \scalebox{0.7}{\begin{forest}
+    [$wff$
+      [$Q\ var$
+        [$\forall x_1$]
+      ]
+      [$wff$, calign=child, calign child=2
+        [$wff$
+          [$pred^1$
+            [$P$]
+          ]
+          [$a$
+            [$var$
+              [$x_1$]
+            ]
+          ]
+        ]
+        [$conn$
+          [$\rightarrow$]
+        ]
+        [$wff$
+          [$Q\ var$
+            [$\exists x_2$]
+          ]
+          [$wff$
+            [$\neg$]
+            [$wff$, calign=child, calign child=2
+              [$pred^2$
+                [$R$]
+              ]
+              [$a$
+                [$const$
+                  [$x_1$]
+                ]
+              ]
+              [$a$
+                [$const$
+                  [$x_2$]
+                ]
+              ]
+            ]
+          ]
+        ]
+      ]
+    ]
+  \end{forest}}
+\end{frame}
+
+\begin{frame}
+  {Skopus und c-Kommando}
+  Skopus in konfigurationaler Logik-Syntax: \alert{c-Kommando}\\
+  Variablen als \alert{gebunden vom nächsten c-kommandierenden koindizierten Quantor}\\
+  \Halbzeile
+  \centering
+  \scalebox{0.6}{\begin{forest}
+    [$wff$
+      [$Q\ var$
+        [$\forall x_1$]
+      ]
+      [$wff$, calign=child, calign child=2, gruentree
+        [$wff$
+          [$pred^1$
+            [$P$]
+          ]
+          [$a$
+            [$var$
+              [$x_1$]
+            ]
+          ]
+        ]
+        [$conn$
+          [$\rightarrow$]
+        ]
+        [$wff$
+          [$Q\ var$
+            [$\exists x_2$]
+          ]
+          [$wff$, bluetree
+            [$\neg$]
+            [$wff$, calign=child, calign child=2
+              [$pred^2$
+                [$R$]
+              ]
+              [$a$
+                [$const$
+                  [$x_1$]
+                ]
+              ]
+              [$a$
+                [$const$
+                  [$x_2$]
+                ]
+              ]
+            ]
+          ]
+        ]
+      ]
+    ]
+  \end{forest}}\\
+  \visible<2->{\footnotesize\alert{Skopus\slash c-Kommando-Domäne von $\exists x_2$}}\visible<3->{ | \footnotesize\gruen{Skopus\slash c-Kommando-Domäne von $\forall x_1$} (zgl.\ \alert{derer von $\exists x_2$})}\\
+\end{frame}
+
+\section{Modelltheorie}
+
+\begin{frame}
+  {Semantik für PL in Vorbereitung auf natürliche Sprache}
+  \onslide<+->
+  \onslide<+->
+  Ziel (zur Erinnerung) | T-Sätze der Form \textit{S aus L ist wahr in v gdw \ldots}\\
+  \Halbzeile
+  \begin{itemize}[<+->]
+    \item \alert{Modell $\Model$} | zugängliches Diskursuniversum (bzw.\ dessen Beschreibung)
+    \item \alert{Menge $D_n$} | Zugängliche Individuen (\textit{domain}) in $\Model_n$
+    \item \alert{Funktion $V_n$} | Valuation -- Zuweisung von
+      \begin{itemize}[<+->]
+        \item Namen zu Individuen in $\Model_n$
+        \item Predikaten zu Tupeln von Individuen
+      \end{itemize}
+    \item \alert{$\Model_n=\tuple{D_n,V_n}$}
+      \Halbzeile
+    \item \alert{Funktion $g_n$} | Zuweisung von Variablen zu Individuen in $\Model_n$ 
+      \Halbzeile
+    \item Allgemeine Evaluation in $\Model_n$ | $\dem{\alpha}^{\Model_n,g_n}$\\
+      \grau{Lies: \textit{Die Extension von Ausdruck $\alpha$ relativ zu $\Model_n$ und $g_n$}}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  {Unterschied zwischen $V_n$ und $g_n$}
+  \onslide<+->
+  \onslide<+->
+  Feste und variable Denotation\\
+  \Halbzeile
+  \begin{itemize}[<+->]
+    \item $V_n$ evaluiert \alert{statisch} im Modell.\\
+      \grau{\footnotesize Wenn das Modell einmal feststeht, evaluiert $V_n$ jede Konstante stets gleich.}
+      \Halbzeile
+    \item Variablen (gebunden durch Quantoren) werden \alert{volatil interpretiert}.\\
+    \item \alert{Iteration} durch Universum $D_n$ durch $g_n$
+    \item Eine Modifikation der Belegung pro Iteration
+      \begin{itemize}[<+->]
+        \item Modifizierte \textit{assignment function} \alert{$g_n[d_i/x_m]$}\\
+          Lies: \textit{relativ zu $g_n$, wobei die Referenz von Variable $x_m$ auf Individuum $d_i$ gesetzt wird}
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  {Evaluation von Variablen}
+  \onslide<+->
+  \onslide<+->\scriptsize
+  $\alert{D_1}=\{Herr\ Webelhuth, Frau\ Klenk, Turm-Mensa\}$ \grau{| Individuen in $\Model_1$}\\
+  \onslide<+->
+  $\alert{V_1(P)}=\{Herr\ Webelhuth, Frau\ Klenk, Turm-Mensa\}$ \grau{| Prädikat $P$ (\zB \textit{ist ein physikalisches Objekt}) in $\Model_1$}\\
+  \onslide<+->
+  Evaluiere \alert{$\dem{\forall x_1Px_1}^{\Model_1,g_1}$}\visible<8->{$=\gruen{1}$ weil keiner Belegung $\dem{Px_1}^{\Model_1,g_1}=\orongsch{0}$}\\
+  \Halbzeile
+  \begin{itemize}[<+->]
+    \item Initiale Belegung \alert{$\dem{x_1}^{\Model_1,g_1}=Herr\ Webelhuth$}\\
+      \scalebox{0.7}{$g_1 = \left[\begin{array}{l}
+          \gruen<5>{x_1 \rightarrow Herr\ Webelhuth}\\
+            x_2 \rightarrow Herr\ Webelhuth\\
+            x_3 \rightarrow Herr\ Webelhuth
+        \end{array}\right]$}\\
+        \Viertelzeile
+          $\dem{Px_1}^{\Model_1,g_1}=\gruen{1}$
+          \Halbzeile
+        \item \alert{$\dem{x_1}^{\Model_1,g_1[Klenk/x_1]}=Frau\ Klenk$}\\
+         \scalebox{0.7}{$g_1 = \left[\begin{array}{l}
+             \gruen<6>{x_1 \rightarrow Frau\ Klenk}\\
+            x_2 \rightarrow Herr\ Webelhuth\\
+            x_3 \rightarrow Herr\ Webelhuth
+        \end{array}\right]$}\\
+        \Viertelzeile
+          $\dem{Px_1}^{\mMm_1,g_1\ekm{Klenk/x_1}}=\gruen{1}$
+          \Halbzeile
+        \item \alert{$\dem{x_1}^{\Model_1,g_1[Turm-Mensa/X_1]}=Turm-Mensa$}\\
+         \scalebox{0.7}{$g_1 = \left[\begin{array}{l}
+             \gruen<7>{x_1 \rightarrow Turm-Mensa}\\
+            x_2 \rightarrow Herr\ Webelhuth\\
+            x_3 \rightarrow Herr\ Webelhuth
+        \end{array}\right]$}\\
+        \Viertelzeile
+          $\dem{Px_1}^{\mMm_1,g_1\ekm{Mensa/x_1}}=\gruen{1}$
+  \end{itemize}
+\end{frame}
+
+\ifdefined\HANDOUT
+  \begin{frame}
+    {Evaluation mit zwei Variablen}
+    \onslide<+->
+    \onslide<+->\scriptsize
+    $\alert{D_1}=\{Herr\ Webelhuth, Frau\ Klenk, Turm-Mensa\}$ \grau{| Individuen in $\Model_1$}\\
+    \onslide<+->
+    $\alert{V_1(Q)}=\{\tuple{Webelhuth,Klenk},\tuple{Webelhuth,Mensa},\tuple{Klenk,Webelhuth}\}$ \grau{| Prädikat $Q$ (\zB \textit{x besucht y}) in $\Model_1$}\\
+    \onslide<+->
+    Evaluiere \alert{$\dem{\forall x_1\exists x_2 Qx_1x_2}^{\Model_1,g_1}\visible<18->{=\orongsch{0}}$} \visible<18->{weil nicht für jede Belegung von $x_1$ mindestens einmal \gruen{1}}\\
+    \onslide<+->
+    \Zeile
+    \begin{minipage}{0.5\textwidth}\begin{itemize}[<+->]
+          \item Initiale Belegung $\dem{x_1}^{\Model_1,g_1}=Frau\ Klenk$
+            \begin{itemize}[<+->]\scriptsize
+              \item $\dem{Qx_1x_2}^{\mMm_1,g_1}=\orongsch{0}$
+              \item $\dem{Qx_1x_2}^{\mMm_1,g_1[\gruen<8>{Klenk/x_2}]}=\orongsch{0}$
+              \item $\dem{Qx_1x_2}^{\mMm_1,g_1[\gruen<9>{Webelhuth/x_2}]}=\gruen{1}$
+            \end{itemize}
+          \item $\dem{x_1}^{\Model_1,g_1[Turm-Mensa/x_1]}=Turm-Mensa$
+            \begin{itemize}[<+->]\scriptsize
+              \item $\dem{Qx_1x_2}^{\mMm_1,g_1[\tuerkis<11-13>{Turm-Mensa/x_1}]}=\orongsch{0}$
+              \item $\dem{Qx_1x_2}^{\mMm_1,g_1[\tuerkis<11-13>{Turm-Mensa/x_1},\gruen<12>{Klenk/x_2}]}=\orongsch{0}$
+              \item $\dem{Qx_1x_2}^{\mMm_1,g_1[\tuerkis<11-13>{Turm-Mensa/x_1},\gruen<13>{Webelhuth/x_2}]}=\orongsch{0}$ \rot{Abbruch!}
+            \end{itemize}
+          \item $\dem{x_1}^{\Model_1,g_1[Webelhuth/x_1]}=Herr\ Webelhuth$
+            \begin{itemize}[<+->]\scriptsize
+              \item $\dem{Qx_1x_2}^{\mMm_1,g_1[\tuerkis<15-17>{Webelhuth/x_1}]}=\gruen{1}$
+              \item $\dem{Qx_1x_2}^{\mMm_1,g_1[\tuerkis<15-17>{Webelhuth/x_1},\gruen<16>{Klenk/x_2}]}=\gruen{1}$
+              \item $\dem{Qx_1x_2}^{\mMm_1,g_1[\tuerkis<15-17>{Webelhuth/x_1},\gruen<17>{Webelhuth/x_2}]}=\orongsch{0}$
+            \end{itemize}
+      \end{itemize}\end{minipage}  \end{frame}
+\else
+  \begin{frame}
+    {Evaluation mit zwei Variablen}
+    \onslide<+->
+    \onslide<+->\scriptsize
+    $\alert{D_1}=\{Herr\ Webelhuth, Frau\ Klenk, Turm-Mensa\}$ \grau{| Individuen in $\Model_1$}\\
+    \onslide<+->
+    $\alert{V_1(Q)}=\{\tuple{Webelhuth,Klenk},\tuple{Webelhuth,Mensa},\tuple{Klenk,Webelhuth}\}$ \grau{| Prädikat $Q$ (\zB \textit{x besucht y}) in $\Model_1$}\\
+    \onslide<+->
+    Evaluiere \alert{$\dem{\forall x_1\exists x_2 Qx_1x_2}^{\Model_1,g_1}\visible<18->{=\orongsch{0}}$} \visible<18->{weil nicht für jede Belegung von $x_1$ mindestens einmal \gruen{1}}\\
+    \onslide<+->
+    \Zeile
+    \begin{minipage}{0.5\textwidth}\begin{itemize}[<+->]
+          \item Initiale Belegung $\dem{x_1}^{\Model_1,g_1}=Frau\ Klenk$
+            \begin{itemize}[<+->]\scriptsize
+              \item $\dem{Qx_1x_2}^{\mMm_1,g_1}=\orongsch{0}$
+              \item $\dem{Qx_1x_2}^{\mMm_1,g_1[\gruen<8>{Klenk/x_2}]}=\orongsch{0}$
+              \item $\dem{Qx_1x_2}^{\mMm_1,g_1[\gruen<9>{Webelhuth/x_2}]}=\gruen{1}$
+            \end{itemize}
+          \item $\dem{x_1}^{\Model_1,g_1[Turm-Mensa/x_1]}=Turm-Mensa$
+            \begin{itemize}[<+->]\scriptsize
+              \item $\dem{Qx_1x_2}^{\mMm_1,g_1[\tuerkis<11-13>{Turm-Mensa/x_1}]}=\orongsch{0}$
+              \item $\dem{Qx_1x_2}^{\mMm_1,g_1[\tuerkis<11-13>{Turm-Mensa/x_1},\gruen<12>{Klenk/x_2}]}=\orongsch{0}$
+              \item $\dem{Qx_1x_2}^{\mMm_1,g_1[\tuerkis<11-13>{Turm-Mensa/x_1},\gruen<13>{Webelhuth/x_2}]}=\orongsch{0}$ \rot{Abbruch!}
+            \end{itemize}
+          \item $\dem{x_1}^{\Model_1,g_1[Webelhuth/x_1]}=Herr\ Webelhuth$
+            \begin{itemize}[<+->]\scriptsize
+              \item $\dem{Qx_1x_2}^{\mMm_1,g_1[\tuerkis<15-17>{Webelhuth/x_1}]}=\gruen{1}$
+              \item $\dem{Qx_1x_2}^{\mMm_1,g_1[\tuerkis<15-17>{Webelhuth/x_1},\gruen<16>{Klenk/x_2}]}=\gruen{1}$
+              \item $\dem{Qx_1x_2}^{\mMm_1,g_1[\tuerkis<15-17>{Webelhuth/x_1},\gruen<17>{Webelhuth/x_2}]}=\orongsch{0}$
+            \end{itemize}
+      \end{itemize}\end{minipage}%
+      \begin{minipage}{0.5\textwidth}%
+      \centering 
+      \scalebox{1.2}{$g_1 = \left[\begin{array}{l}
+          x_1 \rightarrow \tuerkis<11-13,15-17>{%
+            \only<5-10,14,18->{Frau\ Klenk}%
+            \only<11-13>{Turm-Mensa}%
+            \only<15-17>{Herr\ Webelhuth}%
+          }\\
+          x_2 \rightarrow \gruen<8-9,12-13,16-17>{%
+            \only<5-7,10-11,14-15,18->{Turm-Mensa}%
+            \only<8,12,16>{Frau\ Klenk}%
+            \only<9,13,17>{Herr\ Webelhuth}
+          }\\
+        x_3 \rightarrow Herr\ Webelhuth\\
+      \end{array}\right]$}\\
+    \end{minipage}
+  \end{frame}
+\fi
+
+\section{Quantifikation in natürlicher Sprache}
+
+\begin{frame}
+  {Seltsame Quantoren}
+  \onslide<+->
+  \onslide<+->
+  Wie quantifiziert \textit{meist}?\\
+  \Halbzeile
+  \begin{itemize}[<+->]
+    \item Kleineres Problem | $\exists$ sowohl \textit{mindestens ein} als auch \textit{einige}
+      \Halbzeile
+    \item Grundsätzliches Problem | \textit{meist} (und andere)
+      \begin{itemize}[<+->]
+        \item[ ] \textit{Die meisten Patienten sind zufrieden.}
+        \item Hypothetischer Quantor \alert{$\rotatebox[origin=c]{180}{M}$} | \alert{$\rotatebox[origin=c]{180}{M}xPx\rightarrow Zx$}\\\grau{\footnotesize Für die meisten Objekte gilt, dass sie zufrieden sind, wenn sie Patienten sind.}
+        \item \orongsch{Falsche Interpretation}| Domäne = $\dem{P}^{\Model_1}\{x:x\ ist\ Patient\}$, nicht $D_1$
+      \end{itemize}
+      \Halbzeile
+    \item Korrekte Lösung | \alert{Generalisierte Quantoren} (am Ende des Seminars)
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  {Natürliche Sprache | Ambiger Skopus}
+  \onslide<+->
+  \onslide<+->
+  In PL ist Skopus klar geregelt, in natürlicher Sprache nicht.\\
+  \Halbzeile
+  \begin{itemize}[<+->]
+    \item c-Kommando für Skopus nicht adäquat
+    \item Natürliche Sprache ohne \alert{pränexe Normalform} (PNF), Quantor in situ
+    \item Außerdem \alert{Ambiguität = mehrere Lesarten}
+      \begin{itemize}[<+->]
+        \item \emph{Everybody loves somebody.} (\emph{ELS})
+        \item $\forall{}x_1\exists{}x_2Lx_1x_2$
+        \item $\exists{}x_2\forall{}x_1Lx_1x_2$
+      \end{itemize}
+      \Halbzeile
+    \item Für eine strukturelle Modellierung (c-Kommando) | \alert{LF-Bewegung}
+    \item Beispiele für andere Lösungen, mehr in Montagues lf-Tradition
+      \begin{itemize}[<+->]
+        \item \alert{Cooper Storage} (implementiert in HPSG)
+        \item \alert{Unterspezifikation} (implementiert in HPSG; kognitiv recht plausibel)
+        \item \alert{Hypothetische Beweise} (implementiert in Kategorialgrammatik)
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}
+  {Für eine strukturelle Lösung | LF-Bewegung}
+  \onslide<+->
+  \onslide<+->
+  Relevante syntaktische Erweiterung zu $F_1$ | \alert{Quantifier Raising (QR) Rule}\\
+  \Halbzeile
+  \onslide<+->
+  \centering 
+  {\Large \alert{$[_S\ X\ NP\ Y\ ]\ \Longrightarrow\ [_{S^{\prime}}\ NP_i\ [_S\ X\ t_i\ Y\ ]]$}}\\
+  \Halbzeile
+  \begin{itemize}[<+->]
+    \item Phrasenstruktur als Input und Output (= Skopus in Syntax, LF als Syntax)
+    \item Koindizierung und Linksadjunktion an S beide Teil einer Regel
+    \item \grau{Kein wesentlicher Unterschied, falls CP oder IP statt S}
+      \Halbzeile
+    \item Außerdem | \alert{$Det \rightarrow every,\ some$} and \alert{$NP \rightarrow Det\ N^{count}$}
+      \Halbzeile
+    \item Syntax-Problem | Völlig unnötig eine \orongsch{kontextsensitive Regel}
+    \item Semantik-Probleme bei Chierchia
+      \begin{itemize}[<+->]
+        \item Einführung syntaktischer Typen wird skizzenhaft (s.\ Montague)
+        \item Definition zulässiger Modelle unterschlagen (s.\ Montague)
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  {Semantik für QR mit \textit{every}}
+  \onslide<+->
+  \onslide<+->
+  \centering
+  \alert{\Large $\Dem{\ekm{\ekm{every\ \beta}_i\ S}}{\mMm,g}=1\ iff\ for\ all\ d\in D:$\\
+  $if\ d\in\Dem{\beta}{\mMm,g}\ then\ \Dem{S}{\mMm,g\ekm{u/t_i}}$}\\
+  \onslide<+->
+  \Zeile
+  A sentence containing the trace $t_i$ with an adjoined $NP_i$ (which consists of \emph{every} plus the common noun $\beta$) extend to 1 iff for each individual $d$ in the universe $D$ which is in the set referred to by the common noun $\beta$, $S$ denotes 1 with $d$ assigned to the pronominal trace $t_i$. $g$ is modified iteratively to check that.
+\end{frame}
+
+
+\begin{frame}
+  {Semantik für QR-Regel mit \textit{some}}
+  \onslide<+->
+  \onslide<+->
+  \centering
+  \alert{\Large $\Dem{\ekm{\ekm{a\ \beta}_i\ S}}{\mMm,g}=1\ iff\ for\ some\ u\in U:$\\
+    $u\in\Dem{\beta}{\mMm,g}\ and\ \Dem{S}{\mMm,g\ekm{u/t_i}}$}\\
+  \onslide<+->
+  \Zeile
+  Die Interpretation erfolgt nach ähnlichem Schema.
+\end{frame}
+
+\ifdefined\HANDOUT
+  \begin{frame}
+    {Bäume}
+    \onslide<+->
+    \onslide<+->
+    \textit{Martin sends \gruen{all colleagues} \orongsch{some paper}.}\\
+    This is the $\exists\forall$ reading:\\
+    \centering
+    \onslide<+->
+    \Zeile 
+    $\vcenter{\hbox{\scalebox{0.4}{\begin{forest}
+      [$S$
+        [$NP$
+          [$N$
+            [\textit{Martin}]
+          ]
+        ]
+        [$VP$, calign=child, calign child=2
+          [$V_{tr}$
+            [\textit{sends}]
+          ]
+          [$NP$, gruentree
+            [$Det$
+              [\textit{all}]
+            ]
+            [$N$
+              [\textit{colleagues}]
+            ]
+          ]
+          [$NP$, orongschtree
+            [$Det$
+              [\textit{some}]
+            ]
+            [$N$
+              [\textit{paper}]
+            ]
+          ]
+        ]
+      ]
+    \end{forest}}}}~\Longrightarrow~\vcenter{\hbox{\scalebox{0.4}{%
+      \only<4>{\begin{forest}
+      [$S\Prm$
+        [$NP_i$, gruentree
+          [$Det$
+            [\textit{all}]
+          ]
+          [$N$
+            [\textit{colleagues}]
+          ]
+        ]
+        [$S$
+          [$NP$
+            [$N$
+              [\textit{Martin}]
+            ]
+          ]
+          [$VP$, calign=child, calign child=2
+            [$V_{tr}$
+              [\textit{sends}]
+            ]
+            [$t_1$, gruentree]
+            [$NP$, orongschtree
+              [$Det$
+                [\textit{some}]
+              ]
+              [$N$
+                [\textit{paper}]
+              ]
+            ]
+          ]
+        ]
+      ]
+    \end{forest}}}}}~\Longrightarrow~\vcenter{\hbox{\scalebox{0.4}{%
+    \begin{forest}
+      [$S\Prm$
+        [$NP$, orongschtree
+          [$Det$
+            [\textit{some}]
+          ]
+          [$N$
+            [\textit{paper}]
+          ]
+        ]
+        [$S\Prm$
+          [$NP_i$, gruentree
+            [$Det$
+              [\textit{all}]
+            ]
+            [$N$
+              [\textit{colleagues}]
+            ]
+          ]
+          [$S$
+            [$NP$
+              [$N$
+                [\textit{Martin}]
+              ]
+            ]
+            [$VP$, calign=child, calign child=2
+              [$V_{tr}$
+                [\textit{sends}]
+              ]
+              [$t_1$, gruentree]
+              [$t_2$, orongschtree]
+            ]
+          ]
+        ]
+      ]
+    \end{forest}}}}$
+  \end{frame}
+\else
+  \begin{frame}
+    {Bäume}
+    \onslide<+->
+    \onslide<+->
+    \textit{Martin sends \gruen{all colleagues} \orongsch{some paper}.}\\
+    This is the $\exists\forall$ reading:\\
+    \centering
+    \onslide<+->
+    \Zeile 
+    $\vcenter{\hbox{\scalebox{0.5}{\begin{forest}
+      [$S$
+        [$NP$
+          [$N$
+            [\textit{Martin}]
+          ]
+        ]
+        [$VP$, calign=child, calign child=2
+          [$V_{tr}$
+            [\textit{sends}]
+          ]
+          [$NP$, gruentree
+            [$Det$
+              [\textit{all}]
+            ]
+            [$N$
+              [\textit{colleagues}]
+            ]
+          ]
+          [$NP$, orongschtree
+            [$Det$
+              [\textit{some}]
+            ]
+            [$N$
+              [\textit{paper}]
+            ]
+          ]
+        ]
+      ]
+    \end{forest}}}}$~\only<4->{$\Longrightarrow$}\only<5->{$\Longrightarrow$}~$\vcenter{\hbox{\scalebox{0.5}{%
+      \only<4>{\begin{forest}
+      [$S\Prm$
+        [$NP_i$, gruentree
+          [$Det$
+            [\textit{all}]
+          ]
+          [$N$
+            [\textit{colleagues}]
+          ]
+        ]
+        [$S$
+          [$NP$
+            [$N$
+              [\textit{Martin}]
+            ]
+          ]
+          [$VP$, calign=child, calign child=2
+            [$V_{tr}$
+              [\textit{sends}]
+            ]
+            [$t_1$, gruentree]
+            [$NP$, orongschtree
+              [$Det$
+                [\textit{some}]
+              ]
+              [$N$
+                [\textit{paper}]
+              ]
+            ]
+          ]
+        ]
+      ]
+    \end{forest}}%
+    \only<5->{\begin{forest}
+      [$S\Prm$
+        [$NP$, orongschtree
+          [$Det$
+            [\textit{some}]
+          ]
+          [$N$
+            [\textit{paper}]
+          ]
+        ]
+        [$S\Prm$
+          [$NP_i$, gruentree
+            [$Det$
+              [\textit{all}]
+            ]
+            [$N$
+              [\textit{colleagues}]
+            ]
+          ]
+          [$S$
+            [$NP$
+              [$N$
+                [\textit{Martin}]
+              ]
+            ]
+            [$VP$, calign=child, calign child=2
+              [$V_{tr}$
+                [\textit{sends}]
+              ]
+              [$t_1$, gruentree]
+              [$t_2$, orongschtree]
+            ]
+          ]
+        ]
+      ]
+    \end{forest}}}}}$%
+  \end{frame}
+\fi
+
+\section{Aufgaben}
+
+\begin{frame}
+  {Aufgaben I}
+  Erweitern Sie das Fragment D\Sub{1} des Deutschen aus Woche 2 zu D\Sub{2}, um folgende Sätze modellieren zu können. Das Fragment soll Quantorenanhebung als Transformationsregel beinhalten. Sie dürfen bei der Morphologie und der V2\slash VL-Syntax wieder "`schummeln"' und so tun, als wäre Deutsch einfacher, als es ist. Geben Sie außerdem ein minimales Modell an, in dem mindestens einer der Sätze wahr und mindestens einer der Sätze falsch ist.\\
+  \Halbzeile
+  \grau{Wenn Sie den Unterschied zwischen \textit{Linguistin} und \textit{Linguist} berücksichten wollen, überlegen Sie wie das zugehörige Modell aussieht, und was sich eventuell an den Wahrheitswerten der Sätze ändert, wenn sie eins der beiden Wörter als "`generisch"' annehmen.}
+  \Halbzeile
+  \begin{itemize}[<+->]
+    \item Ein Aktivist ist auch Linguist.
+    \item Mindestens ein Mensch ist Linguist.
+    \item Ein Aktivist läuft.
+    \item Alle Linguisten laufen und eine Linguistin ist kreativ.
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}
+  {Aufgaben II}
+  \begin{enumerate}
+    \item Überlegen Sie, wie die Auswertung einfacher quantifizierter Sätze mit der Zuweisungsfunktion $g$ funktionieren müsste, wenn Quantoren mit den Interpretationen folgender natürlichsprächlicher Ausdrücke hinzugefügt würden:
+      \begin{enumerate}
+        \item \textit{genau zwei}
+        \item \textit{mindestens drei}
+        \item \textit{weniger als drei}
+        \item \textit{höchstens vier}
+        \item \textit{eine große Anzahl von}
+        \item \textit{einige} im Gegensatz zu \textit{ein} bzw.\ \textit{mindestens ein}
+        \item \textit{viel} wie in \textit{viel Mehl}
+        \item \textit{500g} wie in \textit{500g Mehl}
+        \item \textit{die wenigsten}
+      \end{enumerate}
+      \Halbzeile
+    \item Überlegen Sie (ggf.\ über unser einfaches Quantifikationsmodell hinaus), was der Unterschied zwischen \textit{alle} und \textit{jeder} im Deutschen bzw.\ \textit{each}, \textit{every} und \textit{all} im Englischen ist.
+      \Halbzeile
+    \item Was ist das Problem für den bisherigen Ansatz, wenn Sie quantifzierende Ausdrücke wie \textit{einmal}, \textit{öfters}, \textit{ab und zu} usw.\ modellieren möchten.
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}
+  {Aufgaben III}
+  Das Deutsche funktioniert etwas anders als das Englische, was Quantorenlesarten angeht. Denken Sie über die Quantoren-Lesarten folgender Sätze nach. Die Einbettung in das assertive Fragment dient nur dazu, Vorfeldeffekte auszuschalten.
+  \Halbzeile
+  \begin{enumerate}[<+->]
+    \item \textit{Alle Kollegen haben ein Buch gelesen.}
+    \item \textit{Ein Buch haben alle Kollegen gelesen.}
+    \item \textit{Zwei Kollegen sind mit drei Autos gefahren.}
+    \item \textit{Mit drei Autos sind zwei Kollegen gefahren.}
+    \item \textit{Zwei Kolleginnen haben allen Kollegen ein Buch gegeben.}
+    \item \textit{Allen Kollegen haben zwei Kolleginnen ein Buch gegeben.}
+    \item \textit{Ein Buch haben zwei Kolleginnen allen Kollegen gegeben.}
+    \item \textit{Zwei Kolleginnen haben ein Buch allen Kollegen gegeben.}
+  \end{enumerate}
+\end{frame}
+
+
+
+
+
+\begin{frame}
+  {Kernfragen in dieser Woche}
+  \onslide<+->
+  \onslide<+->
+  \Large
+  \centering
+  Wie unterscheidet sich Montagues System von GB-Semantik?\\
+  \onslide<+->
+  \Halbzeile
+  Welche Rolle spielen \alert{Typen}?\\
+  \onslide<+->
+  \Halbzeile
+  Was sind \alert{$\lambda$-Sprachen?}\\
+  Und woher kennen Sie den $\lambda$-Operator eigentlich schon?\\
+  \onslide<+->
+  \Halbzeile
+  \grau{\footnotesize Texte für heute: \citet[Kapitel~4]{DowtyEa1981} | \citealt[Kapitel~7]{ChierchiaMcconnellginet2000}}
+\end{frame}
+
+\section{Einfachere Semantik}
+
+\begin{frame}
+  {Montague vs.\ Generativismus}
+  \onslide<+->
+  \onslide<+->
+  Es geht wie immer auch ohne Bewegung.\\
+  \Zeile 
+  \begin{itemize}[<+->]
+    \item Chierchia | auf Grundlage von GB-Syntax
+      \begin{itemize}[<+->]
+        \item Syntax und \alert{Semantik in Phrasenstrukturen}
+        \item Sprache wird zu Logik durch unsichtbare Bewegung.
+        \item Semantik als \alert{eigene Repräsentationsebene}
+      \end{itemize}
+      \Halbzeile
+    \item Montague | \alert{Sprache ist Logik!}
+      \begin{itemize}[<+->]
+        \item Direkte Interpretation von Zeichen als logische Symbole
+        \item Logische Form (lf) als \alert{Sichtbarmachen} logischer Eigenschaften
+        \item \alert{Keine Überseztung}
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  {Vorbemerkung | Charakteristische Funktionen}
+  \onslide<+->
+  \onslide<+->
+  Mengen, über Funktionen definiert\\
+  \Halbzeile
+  \begin{itemize}[<+->]
+    \item Große Bedeutung von Mengen in formaler Semantik
+      \Halbzeile
+    \item Charakteristische Funktion von Mengen\\
+      \alert{$\mathcal{S}(a) = 1\ iff\ a\in{}S,\ else\ 0$}
+    \item CF als Einsortierung in ihre Menge
+    \item CF in Mengendefinitionen\\
+      \rule{0em}{1em}$S=\{x: x\ mod\ 2=0\}$\\
+      \rule{0em}{1em}$\mathcal{S}=f(x)[x\ mod\ 2=0]$\\
+      \Halbzeile
+    \item \alert{Äquivalenz von Mengendenotation und CF-Dontation}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  {Vorbemerkung | T-Sätze und Funktionsapplikation}
+  \onslide<+->
+  \onslide<+->
+  Funktionsapplikation als allgemeiner Kompositionsmechanismus\\
+  \Halbzeile
+  \begin{itemize}[<+->]
+    \item Etwas umständliche Interpretation mit T-Sätzen\\
+      \alert{$\Dem{\ekm{\Sub{S}\ NP\ VP}}{\mMm,g} = 1\ iff\ \Dem{NP}{\mMm,g}\in{}\Dem{VP}{\mMm,g}$}
+      \Halbzeile
+    \item CF statt Mengen | \alert{Funktion appliziert direkt!}\\
+      \begin{itemize}[<+->]
+        \item $\Dem{Mary}{\mMm,g}=Mary$ \emph{in \mM}
+        \item $\Dem{sleeps}{\mMm,g}$ \emph{be the CF of the set of sleepers in \mM}
+        \item \alert{$\Dem{S}{\mMm,g}=\Dem{sleeps}{\mMm,g}(\Dem{Mary}{\mMm,g})$}
+        \item \orongsch{Kein Bedarf an T-Sätzen}
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  {Vorbemerkung | Funktionen von Mengen zu Mengen}
+  \onslide<+->
+  \onslide<+->
+  Funktionen von Mengen von (Tupeln von) Individuen zu Ausdrücken usw.\\
+  \Halbzeile
+  \begin{itemize}[<+->]
+    \item Funktionen \alert{Definitionsbereich $S_1$} $\rightarrow$ \gruen{Wertebereich $S_2$} | $\gruen{S_2}^{\alert{S_1}}$\\
+      \grau{$S_2^{S_1}$ | Die Menge aller Funktionen von $S_1$ zu $S_2$}
+      \Halbzeile
+    \item Beispiel | Einstellige und Zweistellige Prädikate
+      \begin{itemize}[<+->]
+        \item $T=\{0,1\}$ | Wahrheitswerte
+        \item $D$ | Diskursuniversum (Menge aller Individuen)
+        \item $D\times D$ | Menge aller 2-Tupel von Individuen
+          \Viertelzeile
+        \item \alert{$T^D$} | Menge aller Funktionen von Individuen zu Wahrheitswerten\\
+          \grau{Menge der CFs aller einstelligen Prädikate}
+          \Viertelzeile
+        \item \alert{$T^{D\times D}$} | Menge aller Funktionen von 2-Tupeln von Individuen zu Wahrheitswerten\\
+          \grau{Menge der CFs aller zweistelligen Prädikate}
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\section{Getypte Sprachen}
+
+\begin{frame}
+  {Kein Bedarf an Phrasenkategorien}
+  \onslide<+->
+  \onslide<+->
+  Logik hat bereits \alert{Typensysteme}, um Syntax zu strukturieren!\\
+  \Halbzeile
+  \begin{itemize}[<+->]
+    \item \alert{$L_{Type}$} | Prädikatenlogik \alert{$L_1$ plus Typen}
+    \item \alert{Typen} | Semantisch fundierte Klassen von Ausdrücken
+      \Halbzeile
+    \item Einfache Typen
+      \begin{itemize}[<+->]
+        \item Terme | $\ram{e}$
+        \item Wffs\slash Formeln | $\ram{t}$ | \orongsch{Ersetzt Startsymbol \alert{S} der PSG!}
+      \end{itemize}
+      \Halbzeile
+    \item Komplexe\slash \alert{funktionale} Typen
+      \begin{itemize}[<+->]
+        \item Einstellige Prädikate | $\ram{e,t}$
+        \item Zweistellige Prädikate | $\ram{e,\ram{e,t}}$
+      \end{itemize}
+      \Halbzeile
+    \item Allgemein | $\ram{\sigma,\tau}$-Ausdrücke denotieren Funktionen von Denotaten\\
+      von $\ram{\sigma}$-Ausdrücken zu Denotaten von $\ram{\tau}$-Ausdrücken.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  {Modell | Denotate getypter Ausdrücke}
+  \onslide<+->
+  \onslide<+->
+  Homogenes Diskursuniversum $D$ (auch $U$ und bei \citealt{DowtyEa1981} $A$)\\
+  \Halbzeile
+  \begin{itemize}[<+->]
+    \item Allgemein $D_{\alpha}$ | Menge von Denotaten von Ausdrücken des Typs $\alpha$
+      \Halbzeile
+    \item Einfache Typen
+      \begin{itemize}[<+->]
+        \item \alert{$D_{\ram{e}} = U$}
+        \item \alert{$D_{\ram{t}} = \{0,1\}$}
+      \end{itemize}
+      \Halbzeile
+    \item Komplexe Typen | Rekursiv definierte Denotate
+      \begin{itemize}[<+->]
+        \item 
+          \item Allgemein | \alert{$D_{\ram{\alpha,\beta}}=D_{\ram{\beta}}^{D_{\ram{\alpha}}}$}
+          \item Einstelliuge Prädikate | $D_{\ram{e,t}}=D_{\ram{t}}^{D_{\ram{e}}}$
+          \item Zweistellige Prädikate | $D_{\ram{e,\ram{e,t}}}=(D_{\ram{t}}^{D_{\ram{e}}})^{^{D_{\ram{e}}}}$
+      \end{itemize}
+      \Halbzeile
+    \item Interpretation weiterhin durch $V,g$
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  {Komplexe Typen für Funktionen und FA}
+  \onslide<+->
+  \onslide<+->
+  $\ram{\sigma}$-Ausdrücke saturieren $\ram{\sigma,\tau}$-Ausdrücke zu $\ram{\tau}$-Ausdrücken.\\
+  \Zeile
+  \begin{itemize}[<+->]
+    \item Beispiel für Saturierung durch \alert{Funktionsapplikation (FA)}
+      \begin{itemize}[<+->]
+        \item Wenn \alert{$P$} vom Typ \alert{$\ram{e,\ram{e,t}}$}, \gruen{$Q$} vom Typ \gruen{$\ram{e,t}$} und \orongsch{$x,y$} vom Typ \orongsch{$\ram{e}$}
+        \item dann ist $\gruen{Q}(\orongsch{x})$ vom Typ \tuerkis{$\ram{t}$}
+        \item und $\alert{P}(\orongsch{x})$ vom Typ \tuerkis{$\ram{e,t}$} sowie $\alert{P}(\orongsch{x})(\orongsch{y})$ vom Typ \tuerkis{$\ram{t}$}
+      \end{itemize}
+      \Zeile
+    \item Funktionale Typen von \alert{Funktoren}
+      \begin{itemize}[<+->]
+        \item Negation $\neg$ | Typ \alert{$\ram{t,t}$}
+        \item Andere Funktoren $\wedge,\vee,\rightarrow,\leftrightarrow$ | Typ \alert{$\ram{t,\ram{t,t}}$}
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  {Allgemeine Semantik für getypte Sprachen}
+  \onslide<+->
+  \onslide<+->
+  Wirklich keine T-Sätze mehr!\\
+  \Zeile
+  \begin{itemize}[<+->]
+    \item Semantik für $\ram{e}$-Typen (Terme)\\
+      \Viertelzeile
+      $\DEM{a_n} = \alert{V}(a_n)$ \\
+      $\DEM{x_n} = \alert{g}(x_n)$
+      \Halbzeile
+    \item Ansonsten nur FA\\
+      \alert{$\DEM{\delta(\alpha)} = \DEM{\delta}(\DEM{\alpha})$}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  {Verallgemeinerung und Sprachen höherer Ordnung}
+  \onslide<+->
+  \onslide<+->
+  Sprache höherer Ordnung = Sprache mit \alert{Variablen über höhere Typen $\ram{\sigma,\tau}$}\\
+  \Halbzeile
+  \begin{itemize}[<+->]
+    \item $Type$ ist die Menge aller Typen
+      \begin{itemize}[<+->]
+        \item \alert{$\ram{e},\ram{t}\in Type$}
+        \item Wenn $\ram{\sigma},\ram{\tau}\in Type$, dann \alert{$\ram{\sigma,\tau}\in Type$}
+        \item \grau{Nichts sonst ist in $Type$.}
+      \end{itemize}
+      \Viertelzeile 
+    \item $ME$ ist die Menge aller bedeutungsvollen Ausdrücke
+      \begin{itemize}[<+->]
+        \item $ME_{\sigma}$ ist die Menge der Ausdrücke vom Typ $\sigma$ | $ME=\bigcup ME_{\sigma}$ mit $\sigma\in Type$
+        \item $Ty$ ist eine Funktion von Ausdrücken zu ihren Typen | $Ty(a)=\sigma\ iff\ a\in ME_{\sigma}$
+      \end{itemize}
+      \Halbzeile
+    \item Höhere Ordnung | \alert{Variablen über Ausdrücke von funktionalen Typen}
+      \begin{itemize}[<+->]
+        \item $P_{\ram{e,t}}$ und $Q_{\ram{e,\ram{e,t}}}$ | Bekannte \alert{Konstanten} höherer (=funktionaler) Typen
+        \item Parallel \alert{$v_{n_{\ram{e,t}}}$} | Die \alert{n-te Variable über einstellige Prädikate}
+          \Viertelzeile
+        \item Damit möglich \gruen{$M=\{v_{1_{\ram{e,t}}}:\dem{v_{1_{\ram{e,t}}}(m)}=1\}$}\\
+          Wenn $\dem{m}=Maria$, dann ist $M$ die Menge von Marias Eigenschaften!
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  {Systematische Interpretation zur systematischen Syntax}
+  \onslide<+->
+  \onslide<+->
+  Zusammenfassung | Die Semantik reduziert sich auf FA und Variablenauswertung.\\
+  \Halbzeile
+  \begin{itemize}[<+->]
+    \item Interpretation von Termen und Funktionsausdrücken
+      \begin{itemize}[<+->]
+        \item Nicht-logische Konstanten | \alert{$\alpha$: $\DEM{\alpha}=V(\alpha)$}
+        \item Variablen | \alert{$\alpha$: $\DEM{\alpha}=V(\alpha)$}
+        \item Wenn $\alpha\in\ram{a,b}$ und $\beta\in{}a$ dann $\DEM{\alpha(\beta)}=\DEM{\alpha}(\DEM{\beta})$
+      \end{itemize}
+      \Halbzeile
+    \item Logische Konstanten (Typen $\ram{t,t}$ und $\ram{t,\ram{t,t}}$) denotieren Funktionen in $\{0,1\}$.
+      \Halbzeile
+    \item Quantoren
+      \begin{itemize}[<+->]
+        \item Für Variable $v_{1_{\ram{\orongsch{\alpha}}}}$ und Wff $\phi\in{}ME_t$ ist $\DEM{\alert{(\forall{}v_1)\phi}}=1$ gdw
+        \item[ ] für alle $a\in{}D_{\orongsch{\alpha}}$ $\Dem{\phi}{\mMm,g[a/v_1]}=1$
+       \Viertelzeile 
+     \item Für Variable $v_{1_{\ram{\orongsch{\alpha}}}}$ und Wff $\phi\in{}ME_t$ ist $\DEM{\alert{(\exists{}v_1)\phi}}=1$ gdw
+        \item[ ] für mindestens ein $a\in{}D_{\orongsch{\alpha}}$ $\Dem{\phi}{\mMm,g[a/v_1]}=1$
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  {Beispiel | Quantifikation über Prädikate}
+  \onslide<+->
+  \onslide<+->
+  \alert{$\forall{}v_{0_{\ram{e,t}}}\ekm{v_{0_{\ram{e,t}}}(j)\rightarrow v_{0_{\ram{e,t}}}(d)}$}
+  \Halbzeile
+  \begin{itemize}[<+->]
+    \item Eine quantifizierbare Variable vom Typ $\ram{e,t}$ | \alert{$v_{0_{\ram{e,t}}}$}
+    \item Zwei Individuenkonstanten | $j,d\in ME_{\ram{e}}$ \grau{\zB John und Dorothy}
+    \item \textit{Für alle einstelligen Prädikate gilt: Wenn $j$ die vom Prädikat\\
+      beschriebene Eigenschaft hat, hat $d$ auch diese Eigenschaft.}
+      \Halbzeile
+    \item Wann ist diese Wff wahr?
+      \begin{itemize}[<+->]
+        \item Wenn $j$ und $d$ \alert{alle benennbaren Eigenschaften teilen}?
+        \item Eine Eigenschaft jedes Objekts |\\
+          \alert{CF der Menge $\{x:x\ is\ the\ sole\ member\ of\ this\ set\}$} (\textit{union set})
+        \item Einzige Möglichkeit für Wahrheit der Wff also \gruen{j=d}
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  {Beispiel | Wortbildung mit Präfix \textit{non}}
+  \onslide<+->
+  \onslide<+->
+  \textit{non} in Sätzen wie \textit{This function is \alert{non-continuous}.}\\
+  \Halbzeile
+  \begin{itemize}[<+->]
+    \item Produktives Suffix im Englischen, wie \textit{nicht-} im Deutschen
+    \item Bedeutungsbeitrag | \alert{Invertiert die CF} eines Adjektivs
+    \item \alert{Komplementbildung} der Ursprungsmenge in $D_{\ram{e,t}}$
+      \Halbzeile
+    \item Syntax und Semantik von \textit{non}
+      \Viertelzeile
+      \begin{itemize}[<+->]
+        \item Adjektiv \textit{continuous} | Typ $\ram{e,t}$
+        \item Typ von \textit{non} | In: Adjektiv \slash Out: Adjektiv | \alert{$\ram{\ram{e,t},\ram{e,t}}$}
+          \Viertelzeile
+        \item $\DEM{non}=h$ s.\,t.\ \alert{$h\in D_{\ram{\ram{e,t},\ram{e,t}}}$} and for every $k\in{}D_{\ram{e,t}}$ and every $d\in D_{\ram{e}}$\\
+          \gruen{$(h(k))(d) = 1$ iff $k(d)=0$ and $(h(k))(d) = 0$ iff $k(d)=1$}
+
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  {Beispiel | Argumentunterdrückung}
+  \onslide<+->
+  \onslide<+->
+  Optionale Argumente wie in \alert{\textit{I eat.}} oder \alert{\textit{Vanity kills.}}\\
+  \Halbzeile
+  \begin{itemize}[<+->]
+    \item Zweistellige Verben wie \textit{eat} in \alert{$ME_{\ram{e,\ram{e,t}}}$}
+      \Halbzeile
+    \item Aus einem zweistelligen Verb ein einstelliges machen
+      \Viertelzeile
+      \begin{itemize}[<+->]
+        \item Phonologisch leere lexikalische Konstante | \alert{$R_O\in ME_{\ram{\ram{e,\ram{e,t}},\ram{e,t}}}$}\\
+          \grau{\footnotesize Ähnlich wie lexikalische Regeln in HPSG}
+          \Viertelzeile
+        \item Semantik | $\DEM{R_0}=h$ s.\,t.\ \alert{$h\in D_{\ram{\ram{e,\ram{e,t}},\ram{e,t}}}$} and for all $k\in D_{\ram{e,\ram{e,t}}}$ and all $d\in D_{\ram{e}}$\\
+          \gruen{$(h(k))(d)=1$ iff there is some $d\Prm\in D_{\ram{e}}$ s.\,t.\ $k(d\Prm)(d)=1$}
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\section{$\lambda$-Sprachen}
+
+\begin{frame}
+  {Sie kennen bereits $\lambda$-Abstraktionen!}
+  \onslide<+->
+  \onslide<+->
+  \centering 
+  \Large
+  Was bedeutet \alert{$f(x)=3x^2+5x+8$} ?\\
+  \onslide<+->
+  \Zeile
+  \raggedright
+  \normalsize
+  \begin{itemize}[<+->]
+    \item \alert{$3x^2+5x+8$} ist eine Wff mit einer ungebundenen Variable.
+    \item Die Variable wird gebunden und die Wff \alert{wird damit zur Funktion}\\
+      \grau{\footnotesize $x$ wird zur Eingabevariable und muss bei Anwendung durch Eingabewert ersetzt werden.}
+    \item Außerdem wird die Funktion \alert{f genannt}.
+  \end{itemize}
+  \onslide<+->
+  \Halbzeile
+  \centering 
+  \Large
+  In $\lambda$-Notation: \gruen{$f\stackrel{def}{=}\lambda x\ekm{3x^2+5x+8}$}
+\end{frame}
+
+\begin{frame}
+  {Nur ein neuer Variablenbinder}
+  \onslide<+->
+  \onslide<+->
+  \gruen{Mit $\lambda$ bildet man ad hoc anonyme Funktionen.}\\
+  \Halbzeile
+  \begin{itemize}[<+->]
+    \item Abstraktion über Wffs beliebiger Komplexität
+    \item $\lambda$-Bindung der Variable | Gebundene Variable als \alert{Eingabevariable der Funktion}
+    \item Sehr ähnlich wie Listendefinition
+      \begin{itemize}[<+->]
+        \item Menge | \alert{$\{x: x\ mod\ 2=0\}$} \grau{| allgemein $\{x:\phi\}$}
+        \item CF dieser Menge | \alert{$\lambda x\ekm{x\ mod\ 2=0}$} \grau{| allgemein $\lambda x\ekm{\phi}$}
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  {Formale Erweiterung von $L_{Type}$}
+  \onslide<+->
+  \onslide<+->
+  Nur wenige Erweiterungen in $L_{Type}$\\
+  \Halbzeile
+  \begin{itemize}[<+->]
+    \item Für jede Wff $\phi$ mit \alert{$Ty(\phi)=\ram{t}$} und jede \gruen{$x\in Var$} und jede \orongsch{$a\in Con$}
+      \Viertelzeile
+      \begin{itemize}[<+->]
+        \item Abstraktion | $\phi\ \Longrightarrow\ \gruen{\lambda x}\ekm{\alert{\phi}^{[\orongsch{a}/\gruen{x}]}}$\\
+          \grau{\footnotesize Definition $\phi^{[a/x]}$ | Wff $\phi$ in der alle $a$ durch $x$ getauscht wurden}
+        \item Anwendung der Funktion ($\lambda$-Konversion) | $\gruen{\lambda x}\ekm{\alert{\phi}^{[\orongsch{a}/\gruen{x}]}}(\orongsch{a})=\alert{\phi}$
+      \end{itemize}
+      \Halbzeile
+    \item Es gilt \alert{$\lambda{}x\ekm{\phi^{a/x}}(a)\equiv{}\phi$} für jede Wff $\phi$, jede $a\in Con$ und jede $x\in{}Var$
+    \item $x$ kann von einem \alert{beliebigen Typ $\sigma$} sein.
+    \item Es gilt für \alert{$\lambda x\ekm{\phi}$} mit $x\in ME_{\ram{\sigma}}$ stets \alert{\alert{$\phi\in ME_{\ram{t}}$}} sowie \alert{$\lambda x\ekm{\phi}\in ME_{\ram{\sigma,t}}$}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  {Zwei Beispiele}
+  \onslide<+->
+  \onslide<+->
+  Abstraktion über \alert{Individuenvariable} und \alert{Prädikatsvariable}\\
+  \Halbzeile
+  \begin{itemize}[<+->]
+    \item Individuenvariable \alert{$x_{\ram{e}}$} \grau{alternativ $v_{1_{\ram{e}}}$}
+      \begin{itemize}[<+->]
+        \item \alert{$\lambda{}x_{\ram{e}}\ekm{L(x)}$}
+        \item Mit $L$ \zB für \textit{laughs}
+        \item Die CF der Menge von Individuen $d\in{}D_{\ram{e}}$ mit Eigenschaft $L$ (alle Lachenden)
+        \item Mengendefinition dazu \alert{$\{x: L(x)\}$}
+      \end{itemize}
+      \Halbzeile
+    \item Prädikatsvariable \gruen{$P_{\ram{e,t}}$} \grau{alternativ $v_{1_{\ram{e,t}}}$}
+      \begin{itemize}[<+->]
+        \item \gruen{$\lambda{}P_{\ram{e,t}}\ekm{P(l)}$}
+        \item Mit $l$ \zB für \textit{Horst Lichter}
+        \item Die CF aller Eigenschaften $k\in{}D_{\ram{e,t}}$ von $l$ (alle Eigenschaften Horst Lichters)
+        \item Mengendefinition dazu \gruen{$\{P: P(l)\}$}
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  {Als wäre das jetzt nicht schon klar \ldots}
+  \onslide<+->
+  \onslide<+->
+  Die vollen Regeln aus \citet[102]{DowtyEa1981} (Syn C.10 and Sem 10)\\
+  \Halbzeile
+    \begin{itemize}[<+->]
+      \item If $\alpha\in{}ME_{\alpha}$ and $u\in{}Var_b$, then $\lambda{}u\ekm{\alpha}\in{}ME_{\ram{b,a}}$.
+      \item If $\alpha\in{}ME_a$ and $u\in{}Var_b$ then $\DEM{\lambda{}u\ekm{\alpha}}$ is that function $h$ from $D_b$ into $D_a$\\
+        ($h\in D_a^{D_b}$) s.\,t.\ for all objects $k$ in $D_b$, $h(k)$ is equal to $\Dem{\alpha}{\mMm,g\ekm{k/u}}$.
+    \end{itemize}
+  \Halbzeile
+\end{frame}
+
+\begin{frame}
+  {Konversionen}
+  \onslide<+->
+  \onslide<+->
+  \alert{Konversionen\slash Reduktionen} | Arten, $\lambda$-Ausdrücke umzuschreiben\\
+  \Halbzeile
+  \begin{itemize}[<+->]
+    \item \alert{$\alpha$-Konversion} | Umbenennung von Variablen
+      \begin{itemize}[<+->]
+        \item \alert{$\lambda x\ekm{\phi}\stackrel{\alpha}{\equiv}\lambda y\ekm{\phi^{\ekm{x/y}}}$} gdw $y$ in $\phi$ nicht vorkommt
+      \end{itemize}
+      \Halbzeile
+    \item \gruen{$\beta$-Reduktion} | Funktionsapplikation
+      \begin{itemize}[<+->]
+        \item \gruen{$\lambda x\ekm{\phi}(a)\stackrel{\beta}{\equiv}\phi^{\ekm{x/a}}$}
+        \item Ausdrucke mit nicht realisierten, aber möglichen $\beta$-Reduktionen: \gruen{$\beta$-Redex}
+      \end{itemize}
+      \Halbzeile
+    \item \tuerkis{$\eta$-Reduktion} | Entfernen von leeren Abstraktionen
+      \begin{itemize}[<+->]
+        \item \tuerkis{$\lambda x\ekm{F(x)}\stackrel{\eta}{\equiv}F$} gdw $Ty(F)=Ty(\lambda x\ekm{F(x)})$ \grau{(und $x$ nicht frei in F ist)}
+        \item Ausdruck mit nicht realisierten, aber möglichen $\eta$-Reduktionen: \gruen{$\eta$-Redex}
+        \item Mäßige Semantiker | $\eta$-Redex-Fetisch mit \orongsch{$\lambda x\lambda y\lambda z\ekm{gibt\Prm(x,y,z)}$} usw.
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  {The \emph{non} example revised \citep[104]{DowtyEa1981}}
+  \onslide<+->
+  \onslide<+->
+  Das können Sie jetzt nachvollziehen!\\
+  \Zeile
+  \begin{itemize}[<+->]
+    \item $\forall{}x\forall{}v_{0^{\ram{e,t}}}\ekm{(\mathbf{non}(v_{0_{\ram{e,t}}}))(x)\leftrightarrow\neg{}(v_{0_{\ram{e,t}}}(x))}$
+    \item $\forall{}v_{0_{\ram{e,t}}}\ekm{\lambda{}x\ekm{(\mathbf{non}(v_{0_{\ram{e,t}}}))(x)}=\lambda{}x\ekm{\neg{}(v_{0_{\ram{e,t}}}(x))}}$
+    %{\footnotesize (since $\lambda{x}\ekm{\mathbf{non}(v)(x)}$ is unnecessarily abstract/$\eta$ reduction)}
+    \item $\lambda{}v_{0_{\ram{e,t}}}\ekm{\mathbf{non}(v_{0_{\ram{e,t}}})=\lambda{}v_{0_{\ram{e,t}}}\ekm{\lambda{}x\ekm{\neg{}(v_{0_{\ram{e,t}}}(x))}}}$
+    \item %{\footnotesize and since that is about all assignments for $\lambda{}v_{0_{\ram{e,t}}}$:}\\
+    $\mathbf{non}=\lambda{}v_{0_{\ram{e,t}}}\ekm{\lambda{x}\ekm{\neg{}v_{0_{\ram{e,t}}}(x)}}$
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  {Example with \textit{non}}
+  \onslide<+->
+  \onslide<+->
+  \textit{Mary is non-belligerent.}\\
+  \Viertelzeile
+  \grau{Translate `belligerent' as $c_{0_{\ram{e,t}}}$, `Mary' as $c_{0_{\ram{e}}}$, ignore the copula.}\\
+  \onslide<+->
+  \Zeile
+  \centering 
+  \scalebox{0.8}{\begin{forest}
+    [$\neg{}c_{0_{\ram{e,t}}}(c_{0_{\ram{e}}})$ \alert{(by $\lambda$ conv.)}
+      [$\lambda{v_{0_{\ram{e}}}}\ekm{\neg{}c_{0_{\ram{e,t}}}(v_{0_{\ram{e}}})}(c_{0_{\ram{e}}})$ \alert{(by FA)}
+        [$c_{0_{\ram{e}}}$]
+        [$\lambda{v_{0_{\ram{e}}}}\ekm{\neg{}c_{0_{\ram{e,t}}}(v_{0_{\ram{e}}})}$ \alert{(by $\lambda$ conv.)}
+          [$\lambda{}v_{0_{\ram{e,t}}}\ekm{\lambda{v_{0_{\ram{e}}}}\ekm{\neg{}v_{0_{\ram{e,t}}}(v_{0_{\ram{e}}})}}(c_{0_{\ram{e,t}}})$ \alert{(by FA)}
+            [$\lambda{}v_{0_{\ram{e,t}}}\ekm{\lambda{v_{0_{\ram{e}}}}\ekm{\neg{}v_{0_{\ram{e,t}}}(v_{0_{\ram{e}}})}}$]
+            [$c_{0_{\ram{e,t}}}$]
+          ]
+        ]
+      ]
+    ]
+  \end{forest}}
+\end{frame}
+
+
+\section{Ausblick auf Quantifikation bei Montague}
+
+\begin{frame}
+  {Quantifizierte NPs bei Montague}
+  \onslide<+->
+  \onslide<+->
+  Können referentielle und quantifizierte NPs denselben Typ haben?\\
+  \Halbzeile
+  \begin{itemize}[<+->]
+    \item Quantoren-NP-Syntax | Wie die referentieller NPs
+    \item Quantoren-NP-Semantik | Wie die von prädikatenlogischen Quantoren
+      \Halbzeile
+    \item Erstmal nicht aufregend bzw.\ erwartbar in $L_{Type}$
+      \Viertelzeile
+      \begin{itemize}[<+->]
+        \item \textit{Every student walks.}: \alert{$\forall{v_{0_{\ram{e}}}}\ekm{c_{0_{\ram{e,t}}}(v_{0_{\ram{e}}})\rightarrow{}c_{1_{\ram{e,t}}}(v_{0_{\ram{e}}})}$}
+        \item \textit{Some student walks.}: \alert{$\forall{v_{0_{\ram{e}}}}\ekm{c_{0_{\ram{e,t}}}(v_{0_{\ram{e}}})\wedge{}c_{1_{\ram{e,t}}}(v_{0_{\ram{e}}})}$}
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  {Ein höherer Typ}
+  \onslide<+->
+  \onslide<+->
+  Die Macht höherstufiger $\lambda$-Sprachen\\
+  \Zeile 
+  \begin{itemize}[<+->]
+    \item Versuchen Sie, diese Ausdrücke zu verstehen
+      \begin{itemize}[<+->]
+        \item \alert{$\lambda{}v_{0_{\ram{e,t}}}\forall{v_{0_{\ram{e}}}}\ekm{c_{0_{\ram{e,t}}}(v_{0_{\ram{e}}})\rightarrow{}v_{0_{\ram{e,t}}}(v_{0_{\ram{e}}})}$}
+        \item \alert{$\lambda{}v_{0_{\ram{e,t}}}\exists{v_{0_{\ram{e}}}}\ekm{c_{0_{\ram{e,t}}}(v_{0_{\ram{e}}})\wedge{}v_{0_{\ram{e,t}}}(v_{0_{\ram{e}}})}$}
+      \end{itemize}
+    \item Denken Sie daran:
+      \begin{itemize}[<+->]
+        \item $c_{0_{\ram{e,t}}}$ | Das Prädikat für \textit{students}
+        \item $\lambda{}v_{0_{\ram{e,t}}}$ | Variable über einstellige Prädikate
+        \item $v_{0_{\ram{e}}}$ | Variable über Individuen
+      \end{itemize}
+      \Halbzeile
+    \item \alert{Funktionen zweiter Ordnung} (Prädikate als Eingabewerte) 
+      \Halbzeile
+      \onslide<+->
+    \item \gruen{CFs der Mengen von Prädikaten die auf alle\slash einige Studierende zutreffen}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  {Kombination mit Prädikat}
+  \onslide<+->
+  \onslide<+->
+  \centering 
+  \scalebox{1}{\begin{forest}
+    [$\exists{v_{0_{\ram{e}}}}\ekm{c_{0_{\ram{e,t}}}(v_{0_{\ram{e}}})\wedge{}c_{1_{\ram{e,t}}}(v_{0_{\ram{e}}})}$ \alert{(by $\lambda$ conv.)}
+      [$\lambda{}v_{0_{\ram{e,t}}}\exists{v_{0_{\ram{e}}}}\ekm{c_{0_{\ram{e,t}}}(v_{0_{\ram{e}}})\wedge{}v_{0_{\ram{e,t}}}(v_{0_{\ram{e}}})}(c_{1_{\ram{e,t}}})$ \alert{(by FA)}
+        [$\lambda{}v_{0_{\ram{e,t}}}\exists{v_{0_{\ram{e}}}}\ekm{c_{0_{\ram{e,t}}}(v_{0_{\ram{e}}})\wedge{}v_{0_{\ram{e,t}}}(v_{0_{\ram{e}}})}$]
+        [$c_{1_{\ram{e,t}}}$]
+      ]
+    ]
+  \end{forest}}
+\end{frame}
+
+\section{Aufgaben}
+
+\begin{frame}
+  {Aufgaben I}
+  Überlegen Sie, wie die Semantik folgender Sätze in einer $\lambda$-Sprache kompositional modelliert werden kann. Sie können ein vollständiges Fragment entwickeln, müssen es aber nicht. Übersetzen Sie gerne auch einfach einzelne relevante Ausdrücke "`plausibel"' in Prädikatenlogik höherer Ordnung mit $\lambda$-Abstraktion. Die relevanten Konstituenten, bei denen Sie über die Vorteile einer $\lambda$-Sprache nachdenken sollten, sind jeweils farblich hervorgehoben.\\
+  \Halbzeile
+  \begin{enumerate}
+    \item \textit{\alert{Martin und Maria} laufen.}
+    \item \textit{Maria \alert{schwimmt oder taucht}.}
+    \item \textit{Eine Linguistin \alert{schwimmt und läuft}.}
+    \item \textit{Martin \alert{macht irgendwas}.}
+    \item \textit{Das Buch \gruen{brennt} \alert{auf dem Tisch}}.
+    \item \textit{Das Buch \gruen{liegt} \alert{auf dem Tisch}}.
+    \item \textit{Herr Webelhuth legt das Buch \alert{auf oder neben den Tisch}.}
+  \end{enumerate}
+\end{frame}
+
+
+\begin{frame}
+  {Aufgaben II}
+  Versuchen Sie, die Affixe bzw. den Kompositionsvorgang in folgenden Wortpaaren in einer $\lambda$-Prädikatenlogik höherer Ordnung zu modellieren. (Das gleiche wie auf der letzten Folie, nur für Wortbildung statt für Syntax.) Das ist längst nicht alles trivial, und einiges wird nicht funktionieren, je nachdem wie genau Sie es nehmen.\\
+  \Halbzeile
+  \begin{enumerate}
+    \item \textit{Linguist -- Linguist\alert{in}}\\
+      \grau{\footnotesize mit und ohne "`generische"' Form}
+    \item \textit{streichen -- \alert{rot}streichen}\\
+      \grau{\footnotesize Versuchen Sie, die temporalen\slash aspektuellen Besonderheiten irgendwie zu umschiffen.}
+    \item \textit{gehen -- \alert{be}gehen}
+    \item \textit{schreiben -- \alert{ver}schreiben}
+    \item \textit{lesen -- Les\alert{er}}
+    \item \textit{Leser -- \alert{Karten}leser}
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}
+  {Aufgaben III}
+  Wie kann man Passiv in $L_{Type}$ modellieren?
+  \Halbzeile
+  \begin{enumerate}
+    \item Modellieren Sie zunächst die Semantik des passivierten Verbs auf Basis einer Semantik des Aktivverbs.
+    \item Versuchen Sie, für das Deutsche ein minimales Fragment im Stil von $L_{Type}$ zu bauen, das die folgenden beiden Sätze modelliert:
+      \begin{itemize}[<+->]
+        \item Maria grüßt Martin.
+        \item Martin wird gegrüßt.
+      \end{itemize}
+    \item Geben Sie ein minimales Modell an, in dem beide Sätze wahr sind.
+    \item Geben Sie ein minimales Modell an, in dem nur der Aktivsatz, nicht aber der Passivsatz wahr ist.
+  \end{enumerate}
+\end{frame}
+

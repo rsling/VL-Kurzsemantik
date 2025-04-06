@@ -1,0 +1,606 @@
+\begin{frame}
+  {Kernfragen dieser Woche}
+  \onslide<+->
+  \onslide<+->
+  \Large
+  \centering 
+  Wie macht man Logik \alert{kompositional}?\\
+  \onslide<+->
+  \Halbzeile
+  Wie schließt man aus quantifizierten Aussagen (\textit{ein} und \textit{all})?\\
+  \onslide<+->
+  \Halbzeile
+  Was ist die Rolle der \alert{Modelltheorie} Interpretation?\\
+  \onslide<+->
+  \Halbzeile
+  Wann sind prädikatenlogische Ausdrücke \alert{gleichbedeutend}?\\
+  \onslide<+->
+  \Halbzeile
+  Wie \alert{schlussfolgert} man aus prädikatenlogischen Ausdrücken?\\
+  \onslide<+->
+  \Halbzeile
+  \grau{\footnotesize Text für heute: \citet[Kapitel~7~und~8.5]{ParteeEa1990}}
+\end{frame}
+
+\section{Warum Prädikatenlogik?}
+
+\begin{frame}
+  {Kompositionalität}
+  \onslide<+->
+  \onslide<+->
+  Kaum Kompositionalität in der Aussagenlogik\\
+  \Halbzeile
+  \begin{itemize}[<+->]
+    \item Kompositionalität beschränkt auf Ebene des \alert{Satzes\slash der Proposition} (und größer)
+    \item keine Generalisierungen über \alert{Individuen}, \alert{Eigenschaften} und \alert{Quantifikation}
+    \item offensichtlicher Informationsverlust
+      \begin{itemize}[<+->]
+        \item \textit{Martin is an \underline{e}xpert on inversion and Martin is a good \underline{c}limber.}
+        \item wird zu $e\wedge c$
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  {Erwünschte Schlussfolgerungen}
+  \onslide<+->
+  \onslide<+->
+  Deduktion mit Quantifikation\\
+  \Halbzeile
+  \begin{itemize}[<+->]
+    \item alle, einige\slash mindestens ein, zwei, die meisten, \ldots\ Individuen
+    \item einige zu formalisierende Schlüsse
+      \begin{itemize}[<+->]
+        \item \alert{alle x} haben eine Eigenschaft $\vdash$ \alert{einige x} haben diese Eigenschaft
+        \item \alert{Martin} hat eine Eigenschaft $\vdash$ \alert{mindestens ein x} hat diese Eigenschafgt
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\section{Syntax und Semantik}
+
+\begin{frame}
+  {Syntax von PL | Atome ($\approx$ Lexikon)}
+  \onslide<+->
+  \onslide<+->
+  Atome sind nicht mehr automatisch Wffs.\\
+  \Halbzeile
+  \begin{itemize}[<+->]
+    \item \alert{(Individuen)-Variablen}: $x_1, x_2, y, z, \cdots$ \grau{$\in V$}
+    \item \alert{(Individuen-)Konstanten}: $a, b, c, \cdots$ \grau{$\in C$}
+    \item \alert{Terme}: Variablen und Konstanten \grau{$T=V\cup C$}
+    \item \alert{Prädikatensymbole}: $A, B, C, \cdots \grau{\in P}$
+      \begin{itemize}[<+->]
+        \item jedes Prädikat mit $n$ Argumenten \grau{($n$-stellige Prädikate)}
+        \item \grau{Mengen $P^1,\ldots,P^n\subset P$}
+      \end{itemize}
+    \item \alert{Quantoren}
+      \begin{itemize}[<+->]
+        \item $\exists$ \textit{es gibt mindestens ein \_\_}
+        \item $\forall$ \textit{für alle \_\_\ gilt}
+      \end{itemize}
+    \item plus alle \alert{Funktoren} der Aussagenlogik
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  {Syntax von PL | Komposition}
+  \onslide<+->
+  \onslide<+->
+  Wffs aus Prädikaten, Termen und Quantoren\\
+  \Halbzeile
+  \begin{itemize}[<+->]
+    \item \alert{$P(t_1,\cdots,t_n)$} ist eine Wff\\
+      wenn \alert{$P\in P^n$} und \alert{$t_1,\cdots,t_n\in T$}
+      \Halbzeile
+    \item \alert{$(\exists x)\phi$} und \alert{$(\forall x)\phi$} sind Wffs\\
+      wenn \alert{$x\in V$} und \alert{$\phi$ eine Wff} ist
+      \Halbzeile
+    \item Wffs lassen sich mit den Funktoren der Aussagenlogik kombinieren
+      \Halbzeile
+    \item Nichts anderes ist eine Wff in PL.\\
+      \grau{Hinweis | Eigentlich ist Wff auch als Menge aller Wffs definiert.}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  {Semantik | Modelle und Individuen}
+  \onslide<+->
+  \onslide<+->
+  \alert{Modell} | Die (Beschreibung der) Welt, relativ zu der Wffs ausgewertet werden\\
+  \Halbzeile
+  \begin{itemize}[<+->]
+    \item \alert{Model} \Model | enthält \alert{Diskursuniversum} $D$ = nicht-leere Menge aller Individuen
+    \item Beispiel | ${\mathcal M}_1$ enthält $D=\{Martin,Kilroy,Scully\}$
+      \Halbzeile
+    \item \alert{Valuationsfunktion} | $\dem{\cdot}^{\Model}$ enthält eine Funktion in $T\times D$
+      \Viertelzeile
+    \item Beispiel für ein Model \Model\Sub{1}
+      \begin{itemize}[<+->]
+        \item für $m,k,s\in C$ und $Martin, Kilroy, Scully\in D$
+        \item $\dem{m}^{\Model_1}=Martin$
+        \item $\dem{k}^{\Model_1}=Kilroy$
+        \item $\dem{s}^{\Model_1}=Scully$
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  {Semantik | Prädikate}
+  \onslide<+->
+  \onslide<+->
+  Bedeutung von Prädikaten | \alert{Relationen} (Mengen von Tupeln)\\
+  \Halbzeile
+  \begin{itemize}[<+->]
+    \item Erinnerung | n-stellige Relationen als \alert{n-Tupel}, hier Teil des Modells
+      \begin{itemize}[<+->]
+        \item \gruen<10>{\textit{schläft} | $R_1=\{Martin,Kilroy,Biden,\cdots\}$}
+        \item \textit{Staatsoberhaupt von} | $R_2=\{\tuple{Biden,USA},\tuple{Xi,China},\tuple{Carl\ Gustaf,Schweden},\cdots\}$
+        \item \gruen<11>{\textit{jagt} | $R_3=\{\tuple{Kilroy,Martin}, \tuple{Scully,Kilroy}\}$}
+      \end{itemize}
+      \Halbzeile
+    \item Menge $R$ der Relationen \grau{($R^n$ für n-stellige)}
+    \item Semantik eines Prädikats: Relation | $\dem{\cdot}^{\Model}$ enthält eine Funktion in $P\times \{0,1\}$
+    \item \alert{$\dem{P(t_1)}^{\Model}=\dem{P}^{\Model}(\dem{t_1}^{\Model})=1\ iff\ \dem{t_1}^{\Model}\in\dem{P}^{\Model}$}\\
+      \grau{\footnotesize Äquivalente Formulierung mit n-Tupeln für n-stellige Prädikate}
+      \Viertelzeile
+      \begin{itemize}[<+->]
+        \item \gruen<10>{\textit{Martin ($m$) schläft ($R_1$)}: $\dem{R_1(m)}^{\Model_1}=1$ weil $\dem{m}^{\Model_1}=Martin$ und $Martin\in\dem{R_1}^{\Model_1}$}
+        \item \gruen<11>{\textit{Martin ($m$) jagt ($R_3$) Kilroy ($k$)}: $\dem{R_3(m,k)}^{\Model_1}=0$ weil\\
+          $\dem{m}^{\Model_1}=Martin$ und $\dem{k}^{\Model_1}=Kilroy$ und $\tuple{Martin,Kilroy}\not\in\dem{R_3}^{\Model_1}$}
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  {Semantik | Funktoren und Quantoren}
+  \onslide<+->
+  \onslide<+->
+  Synkategorematische Ausdrücke | \alert{Modifizieren Bedeutungen}, haben aber keine eigene\\
+  \Halbzeile
+  \begin{itemize}[<+->]
+    \item wie in AL
+      \begin{itemize}[<+->]
+        \item \alert{$\neg\phi$}
+        \item \alert{$\phi_1\vee\phi_2$} und \alert{$\phi_1\wedge\phi_2$}
+        \item \alert{$\phi_1\rightarrow\phi_2$} und \alert{$\phi_1\leftrightarrow\phi_2$}
+      \end{itemize}
+      \Halbzeile
+    \item Allquantor | \alert{$\dem{(\forall x)\phi}^{\Model}=1$} gdw \alert{$\dem{\phi}^{\Model}=1$} für alle $c\in C$,\\
+      eingesetzt anstelle aller Vorkommen von $x$ in $\phi$
+    \item Existenzquantor | \alert{$\dem{(\exists x)\phi}^{\Model}=1$} gdw \alert{$\dem{\phi}^{\Model}=1$} für mindestens ein $c\in C$,\\
+      eingesetzt anstelle aller Vorkommen von $x$ in $\phi$
+      \Halbzeile
+    \item eigentlich ein Algorithmus, der alle Individuenkonstanten durchgeht
+    \item Quantorenskopus von \alert{außen nach innen}
+    \item \alert{extrem enger Skopus über die nächstkleinste Wff} \grau{(also Klammern!)}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  {Appellativa und Sätze}
+  \onslide<+->
+  \onslide<+->
+  Wie werden normale Sätze mit Appellativa und Verben formalisiert?\\
+  \Halbzeile
+  \begin{itemize}[<+->]
+    \item \textit{\gruen<5>{Alle} \gruen<6>{Menschen} \gruen<7>{feiern}.}
+      \begin{itemize}[<+->]
+        \item \orongsch{zwei} Prädikate: \textit{Mensch} ($M$) und \textit{feiern} ($F$)
+        \item \gruen<10->{$\only<5->{\gruen<5>{(\forall x)}}\only<6->{[\gruen<6>{M(x)}}\only<9->{\orongsch<9>{\rightarrow}}\only<7->{\gruen<7>{F(x)}]}$}
+        \item<10-> Was würde \orongsch{$(\forall x)[M(x)\wedge F(x)]$} bedeuten?
+      \end{itemize}
+      \Halbzeile
+    \item<11-> \textit{\gruen<13,22>{Martin} \gruen<16,22>{schenkt} \gruen<14,22>{Scully} \gruen<19,21,22>{einen} \gruen<17,23>{Außerirdischen}.}
+      \begin{itemize}[<+->]
+        \item<12-> zwei Individuenkonstanten: \only<13->{\gruen<13>{$m$}} \only<14->{, \gruen<14>{$s$}}
+        \item<15-> zwei Prädikate: \only<16->{\gruen<16>{$S$}}\only<17->{, \gruen<17>{$A$}}
+        \item<18-> ein Quantor (mit einer Variable): \only<19->{\gruen<19>{$\exists x$}}
+      \item<20-> \gruen<26->{$\only<21->{\gruen<21>{(\exists x)}}\only<23->{[\gruen<23>{A(x)}}\only<24->{\orongsch<24>{\wedge}}\only<22->{\gruen<22>{S(m,s,x)}]}$}
+      \item<26-> Was würde \orongsch{$(\exists x)[A(x)\rightarrow S(m,s,x)]$} bedeuten?
+          % \visible<>{\gruen<>{}}
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  {Details zu Quantoren}
+  \label{slide:quantoren}
+  \onslide<+->
+  \begin{itemize}[<+->]
+    \item Vertauschbarkeit von Quantoren
+      \begin{itemize}[<+->]
+        \item $\gruen{(\forall x)}\alert{(\forall y)}\phi\equiv\alert{(\forall y)}\gruen{(\forall x)}\phi$
+          \Viertelzeile
+        \item $\gruen{(\exists x)}\alert{(\exists y)}\phi\equiv\alert{(\exists y)}\gruen{(\exists x)}\phi$
+          \Viertelzeile
+        \item Sowie $\gruen{(\exists x)}\alert{(\forall y)}\phi \vdash\alert{(\forall y)}\gruen{(\exists x)}\phi$\\
+          aber $\orongsch{(\forall x)(\exists y)}\phi\ \rot{\not\vdash}\ \orongsch{(\exists y)(\forall x)}\phi$
+      \end{itemize}
+      \Halbzeile
+    \item Widersprüche (Kontradiktionen)
+      \begin{itemize}[<+->]
+        \item $(\exists x)[P(x)\wedge\neg P(x)]$ \grau{| so wie $P(m)\wedge\neg P(m)$}
+        \item $(\forall x)[W(x)\wedge \neg W(x)]$ \grau{| $\forall$ sucht eine leere Menge}
+      \end{itemize}
+      \Halbzeile
+    \item Typische Fehler | \rot{Diese Formeln sind falsch!}
+      \begin{itemize}[<+->]
+        \item Prädikate direkt am Quantor | \rot{$(\forall M) \ldots$} \grau{falsch für: \textit{für alle Menschen gilt}}
+        \item Negierte Quantoren | \rot{$(\neg\forall x)M(x)$} \grau{falsch für: \textit{nicht für alle x gilt}}
+        \item Funktoren vor Termen | \rot{$(\exists x)M(x)\wedge F(\neg x)$} \grau{falsch für: \textit{Ein Mensch feiert nicht.}}
+        \item Mehrfache Variablenbindung | \rot{$(\forall x\exists x)P(x)$}
+        \item Klammern vergessen, ungebundene Variable | \rot{$(\forall x)P(x)\rightarrow Q(x)$} \grau{statt: $(\forall x)[P(x)\rightarrow Q(x)]$}
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  {Alternative Schreibweisen}
+  \onslide<+->
+  \onslide<+->
+  Äquivalente Ausdrücke in unterschiedlichen Schreibweisen\\
+  \Halbzeile
+  \begin{itemize}[<+->]
+    \item Schreibweisen für Quantoren und ihre Skopus
+      \begin{itemize}[<+->]
+        \item $(\forall x)(\exists y)P(x,y)$
+        \item $\forall x.\exists y.P(x,y)$
+        \item $\forall x\exists y.P(x,y)$
+        \item $\forall x\exists y[P(x,y)]$
+      \end{itemize}
+      \Halbzeile
+    \item Schreibweisen für Prädikate und ihre Argumente
+      \begin{itemize}[<+->]
+        \item $P(x)$, $P(x,y)$
+        \item $P(x)$, $P(\tuple{x,y})$
+        \item $Px$, $Pxy$
+        \item $Px$, $xPy$
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
+% \begin{frame}
+%   {Sokpus von Quantoren}
+%   \onslide<+->
+%   \onslide<+->
+%   Quantoren \alert{binden Variablen}.\\
+%   \Viertelzeile
+%   \onslide<+->
+%   Es darf keine \orongsch{ungebundenen Variablen} geben.\\
+%   \Viertelzeile
+%   \onslide<+->
+%   Konstanten müssen \alert{immer ungebunden} sein.\\
+%   \Halbzeile
+%   Quantoren haben engstmöglichen Skopus
+%   \Viertelzeile
+%   \begin{itemize}[<+->]
+%     \item $\underline{(\forall x)Px}\vee Qx$
+%     \item $\underline{(\forall x)(Px\vee Qx)} = \underline{(\forall x)Px} \vee \underline{(\forall x)Qx}$
+%     \item $\underline{(\exists x)Px} \rightarrow \underline{(\forall y)(Qy\wedge Ry)}$
+%     \item $\underline{(\exists x)Px}\wedge Qx$ (second $x$ is a unbound)
+%   \end{itemize}
+% \end{frame}
+
+\section{Äquivalenzen}
+
+% \frame{\frametitle{Universal $\vee$ and $\wedge$}
+% \begin{itemize}
+%   \item<1-> $\exists$ and $\forall$ `or' and `and' over the universe of discourse (hence: $\bigvee$ and $\bigwedge$)
+%   \item<2-> \alert{$(\forall x)Px$ $\Leftrightarrow$ $Px_1\wedge Px_2\wedge \ldots\wedge Px_n$} for all $x_n$ assigned to $d_n\in D$
+%   \item<3-> \alert{$(\exists x)Px$ $\Leftrightarrow$ $Px_1\vee Px_2\vee\ldots\vee Px_n$} for all $x_n$ assigned to $d_n\in D$
+%   \item<4-> hence: \alert{$\neg(\forall x)Px$ $\Leftrightarrow$ $\neg(Px_1\wedge Px_2\wedge \ldots\wedge Px_n)$}
+%   \item<5-> with DeM: \alert{$\overline{Px_1\wedge Px_2\wedge \ldots\wedge Px_n}$}
+%   \item<6-> $\Leftrightarrow$ \alert{$\overline{Px_1}\vee \overline{Px_2}\vee \ldots\vee \overline{Px_n}$}
+%   \item<7-> $\Leftrightarrow$ \alert{$(\exists x)\neg Px$}
+% \end{itemize}
+% }
+
+\begin{frame}
+  {Quantorennegation (QN)}
+  \onslide<+->
+  \onslide<+->
+  In Beweisen oft praktische Äquivalenzen mit negierten Quantoren\\
+  \Halbzeile
+  \begin{itemize}[<+->]
+    \item $\neg(\forall x)Px\equiv(\exists x)\neg Px$\\
+      \grau{\footnotesize\textit{Nicht alle Dinge sind Parkscheiben.} $\equiv$ \textit{Es gibt mindestens ein Ding, das keine Parkscheibe ist.}}
+      \Halbzeile
+    \item $\neg(\exists x)Px\equiv(\forall x)\neg Px$\\
+      \grau{\footnotesize\textit{Es gibt keine Parkscheibe.} $\equiv$ \textit{Alle Dinge sind keine Parkscheiben.}}
+      \Halbzeile
+    \item $\neg(\forall x)\neg Px\equiv(\exists x)Px$\\
+      \grau{\footnotesize\textit{Nicht alle Dinge sind keine Parkscheibe.} $\equiv$ \textit{Es gibt eine Parkscheibe.}}
+      \Halbzeile
+    \item $\neg(\exists x)\neg Px\equiv(\forall x)Px$\\
+      \grau{\footnotesize\textit{Es gibt nichts, das keine Parkscheibe ist.} $\equiv$ \textit{Alle Dinge sind Parkscheiben.}}
+      \Halbzeile
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  {Distributivgesetze (Distr.)}
+  \begin{itemize}[<+->]
+    \item Allquantordistribution\\
+      $(\forall x)[\alert{P(x)\wedge Q(x)}] \equiv \gruen{(\forall x)P(x)}\wedge\gruen{(\forall x)Q(x)}$
+      \Halbzeile
+    \item Existenzquantordistribution\\
+      $(\exists x)[\alert{P(x)\vee Q(x)}] \equiv \gruen{(\exists x)P(x)}\vee\gruen{(\exists x)Q(x)}$
+      \Halbzeile
+    \item Warum hingegen\\
+      $(\forall x)P(x)\vee(\forall x)Q(x)\ \gruen{\vdash}\ (\forall x)[P(x)\vee Q(x)]$\\
+      aber\\
+      $(\forall x)[P(x)\vee Q(x)]\ \rot{\not\vdash}\ (\forall x)P(x)\vee(\forall x)Q(x)$\\
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  {Quantorenbewegung -- Nein, nicht in (Spec,CP)!}
+  \onslide<+->
+  \onslide<+->
+  Wünschenswert: alle Quantoren ganz am Anfang\\
+  \Halbzeile
+  \begin{itemize}[<+->]
+    \item Quantorenbewegung aus dem \alert{Antezedens von Konditionalen}\\
+      $\orongsch{(\exists x)\underline{P(x)}\rightarrow\phi}\equiv\alert{(\forall x)\underline{[P(x)\rightarrow\phi]}}$\\
+      $\orongsch{(\forall x)\underline{P(x)}\rightarrow\phi}\equiv\alert{(\exists x)\underline{[P(x)\rightarrow\phi]}}$
+      \Halbzeile
+    \item Quantorenbewegung aus \alert{Konjunktionen}, \alert{Disjunktionen} und\\
+      \alert{Konsequenzen von Konditionalen:} \alert{einfach nach vorne bewegen!}
+      \Halbzeile
+      \begin{itemize}[<+->]
+        \item $(\exists x)P(x)\rightarrow(\exists y)F(y)\equiv(\forall x)(\exists y)[P(x)\rightarrow F(x)]$\\
+          \grau{\textit{\footnotesize Wenn es eine Parkscheibe gibt, gibt es einen Falk-Plan. $\equiv$ Für alle Dinge x gilt,\\
+          dass es ein Ding y gibt, sodass y ein Falk-Plan ist, wenn x eine Parkscheibe ist.}}
+          \Viertelzeile
+        \item $S(m)\vee (\exists x)P(x)\equiv(\exists x)[S(m)\vee P(x)]$\\
+          \grau{\textit{\footnotesize Martin schläft oder es gibt eine Parkscheibe. $\equiv$ Es gibt ein Ding x,\\
+          sodass entweder Martin schläft oder dieses Ding eine Parkscheibe ist.}}
+      \end{itemize}
+      \Halbzeile
+    \item Bei Bewegung des Quantors von $x$ darf $x$ in der restlichen Formel nicht frei sein!
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  {Quantorenbewegung mit Bäumen}
+  \onslide<+->
+  \onslide<+->
+  \centering 
+  $\vcenter{\hbox{\begin{forest}
+    [Wff
+      [Wff, gruentree
+        [\orongsch{$\exists x$}]
+        [Wff
+          [$P(x)$]
+        ]
+      ]
+      [$\rightarrow$]
+      [Wff
+        [$\phi$]
+      ]
+    ]
+  \end{forest}}}$\visible<3->{~\hspace{2em}$\Longrightarrow$\hspace{2em}~%
+  $\vcenter{\hbox{\begin{forest}
+    [Wff, gruentree
+      [\orongsch{$\forall x$}]
+      [Wff
+        [Wff
+          [$P(x)$]
+        ]
+        [$\rightarrow$]
+        [Wff
+          [$\phi$]
+        ]
+      ]
+    ]
+  \end{forest}}}$}\\
+  \Doppelzeile
+  \visible<3->{Bewegung = \gruen{Ausweitung des Skopus}}\\
+  \visible<4->{\grau{\footnotesize Wenn man möchte, kann man jetzt von c-Kommando reden.}}\\
+  \Halbzeile
+  \visible<5->{\alert{Pränexe Normalform} | Allen Quantoren maximalen Skopus geben}
+\end{frame}
+
+\begin{frame}
+  {Quantorenbewegung | Obacht auf die Variablen}
+  \onslide<+->
+  \onslide<+->
+  Was steckt in $\phi$?\\
+  \onslide<+->
+  \Halbzeile
+  \centering 
+  $\vcenter{\hbox{\begin{forest}
+    [Wff
+      [Wff, gruentree
+        [\orongsch{$\exists x$}]
+        [Wff
+          [$P(x)$]
+        ]
+      ]
+      [$\rightarrow$]
+      [Wff, bluetree
+        [\orongsch{$\forall x$}]
+        [$Q(x)$]
+      ]
+    ]
+  \end{forest}}}$\visible<4->{~\hspace{2em}$\Longrightarrow$\hspace{2em}~%
+  $\vcenter{\hbox{\begin{forest}
+    [Wff, gruentree
+      [\orongsch{$\forall x$}]
+      [Wff
+        [Wff
+          [$P(x)$]
+        ]
+        [$\rightarrow$]
+        [Wff, rottree
+          [\orongsch{$\forall x$}]
+          [$Q(x)$]
+        ]
+      ]
+    ]
+  \end{forest}}}$}\\
+  \Doppelzeile
+  \visible<3->{Links | Unabhängig ausgewertete \orongsch{quantifizierte} $x$ mit \gruen{unabhängigem} \alert{Skopus}}\\
+  \visible<4->{Rechts | Problem! Das $x$ im \rot{roten Teilbaum} ist doppelt gebunden.}
+\end{frame}
+
+
+
+\begin{frame}
+  {Formalisieren üben}
+  \onslide<+->
+  \begin{itemize}[<+->]
+    \item \textit{\underline{d}rip-133 ist \underline{Musiker} und mit Dan \underline{B}ell \underline{b}efreundet.}
+    \item \textit{Wenn es \underline{E}inhörner gibt, muss \underline{J}an \underline{s}ingen.}
+    \item \textit{\underline{E}r hat einen \underline{N}etzfilter repariert, und nicht alle \underline{K}omponenten waren \underline{v}erfügbar.}
+    \item \textit{Alle \underline{F}ernsehpersönlichkeiten sind \underline{M}enschen, und \underline{H}eide ist eine \underline{F}ernsehpersönlichkeit.}
+    \item \textit{Einige \underline{F}ernsehpersönlichkeiten sind keine \underline{M}usiker.}
+    \item \textit{Manche sind weder eine \underline{F}ernsehpersönlichkeit, noch \underline{k}ennen sie Dan \underline{B}ell.}
+  \end{itemize}
+\end{frame}
+
+\section{Schlussregeln}
+
+\begin{frame}
+  {Universelle Instanziierung und Generalisierung}
+  \onslide<+->
+  \onslide<+->
+  Schließen von \alert{Allaussagen} auf \alert{Individualaussagen} und umgekehrt\\
+  \Halbzeile
+  \begin{itemize}[<+->]
+    \item Universelle Instanziierung \alert{$-\forall$}
+      \begin{itemize}[<+->]
+        \item \alert{$(\forall x)P(x)\ \vdash\ P(a)$}\\
+        \grau{\textit{\footnotesize Wenn alle Dinge Eigenschaft $P$ haben, hat Individdum $a$ diese Eigenschaft.}}
+        \item Für $a$: frische oder bereits verwendete Individuenkonstanten
+      \end{itemize}
+      \Halbzeile
+    \item Universelle Generalisierung \alert{$+\forall$}
+      \begin{itemize}[<+->]
+        \item \alert{$P(a)\ \vdash\ (\forall x)P(x)$}
+        \item Nur, wenn $a$ durch $-\forall$ eingeführt wurde!
+      \end{itemize}
+      \Halbzeile
+    \item Beispiel \ldots\ \alert{Substanzielles wird an Individuen bewiesen.}\\
+      \onslide<+->
+      \Viertelzeile
+      \rule{4em}{0em}\scalebox{0.7}{%
+        \begin{tabular}[h]{clll}
+          \visible<10->{1 & $(\forall x)[P(x)\vee Q(x)]$ & & \grau{\footnotesize\textit{Alles ist entweder eine Parkscheibe oder besteht aus Quarks.}}}\\
+          \visible<11->{2 & $\neg P(m)$ &  & \grau{\footnotesize\textit{Martin ist keine Parkscheibe.}}}\\
+          \cline{1-3}
+          \visible<12->{3 & $P(m)\vee Q(m)$ & 1,$-\forall(2)$  & \grau{\footnotesize\textit{Martin ist entweder eine Parkscheibe oder besteht aus Quarks.}}}\\
+          \visible<13->{4 & $Q(m)$ & 3,DS  & \grau{\footnotesize\textit{Martin besteht aus Quarks.}}}\\
+        \visible<14->{5 & $(\forall x)Q(x)$ & 4,3,$+\forall[1]$  & \grau{\footnotesize\textit{Alles besteht aus Quarks.}}}\\
+        \end{tabular}%
+      }
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  {Existenzielle Generalisierung und Instanziierung}
+  \onslide<+->
+  \onslide<+->
+  Schließen von \alert{Individualaussagen} auf \alert{Existenzaussagen} und umgekehrt\\
+  \Halbzeile
+  \begin{itemize}[<+->]
+    \item Existenzielle Generalisierung \alert{$+\exists$}
+      \begin{itemize}[<+->]
+        \item \alert{$P(a)\ \vdash\ (\exists x)P(x)$}\\
+        \grau{\textit{\footnotesize Wenn ein benanntes Idividuum Eigenschaft $P$ hat, hat irgendein Individdum diese Eigenschaft.}}
+        \item Für $x$: nur frische Individuenvariablen
+      \end{itemize}
+      \Halbzeile
+   \item Existenzielle Instanziierung \alert{$-\exists$}
+      \begin{itemize}[<+->]
+        \item \alert{$(\exists x)P(x)\ \vdash\ P(a)$}\\
+        \grau{\textit{\footnotesize Wir geben dem minimalen Träger der Eigenschaft einen Namen.}}
+        \item Für $a$: nur frische Individuenkonstanten
+      \end{itemize}
+      \Halbzeile
+    \item Beispiel\\
+      \onslide<+->
+      \Viertelzeile
+      \rule{4em}{0em}\scalebox{0.7}{%
+        \begin{tabular}[h]{clll}
+          \visible<11->{1 & $(\exists x)Q(x)$ &   & \grau{\footnotesize\textit{Es gibt ein Ding, das aus Quarks besteht.}}}\\
+          \visible<12->{2 & $(\forall y)[Q(y)\rightarrow P(y)]$ &   & \grau{\footnotesize\textit{Alles, was aus Quarks besteht, ist ein physikalisches Objekt.}}}\\
+          \cline{1-3}
+          \visible<13->{3 & $Q(h)$ & 1,$-\exists$  & \grau{\footnotesize\textit{Ein Objekt, das wir jetzt Hoxnoxno nennen, besteht aus Quarks.}}}\\
+          \visible<14->{4 & $Q(h)\rightarrow P(h)$ & 2,$-\forall$  & \grau{\footnotesize\textit{Wenn Hoxnoxno aus Quarks besteht, ist Hoxnoxno ein physikalisches Objekt.}}}\\
+          \visible<15->{5 & $P(h)$ & 3,4,MP  & \grau{\footnotesize\textit{Hoxnoxno ist ein physikalisches Objekt.}}}\\
+          \visible<16->{6 & $(\exists z)P(z)$ & 5,$+\exists$  & \grau{\footnotesize\textit{Es gibt physikalische Objekte.}}}\\
+        \end{tabular}%
+      }
+  \end{itemize}
+  
+\end{frame}
+
+
+\begin{frame}
+  {Beispielaufgabe}
+  \onslide<+->
+  \onslide<+->
+  (1) Herr \underline{K}eydana fährt einen \underline{G}olf. (2) Alles, was einen Golf fährt, ist entweder ein \underline{M}ensch oder eine \underline{A}I, die auf Deep Learning basiert. Es gibt keine AI, die auf Deep Learning basiert, die einen Golf fährt. \textbf{Zeigen oder widerlegen Sie: B: Es gibt mindestens einen Menschen.}\\
+  \Halbzeile
+  \begin{itemize}[<+->]
+    \item[1] $G(k)$
+    \item[2] $(\forall x)[(G(x)\rightarrow M(x)\vee A(x)]$
+    \item[3] $\neg(\exists y)[A(y)\wedge G(y)]$
+    \item[ ] $(\exists z)M(z)$ 
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  {Der Beweis}
+  \onslide<+->
+  \onslide<+->
+  \centering 
+  \scalebox{0.8}{\begin{tabular}[h]{rlll}
+    1 & $G(k)$                                          &                     & \textit{\grau{\scriptsize Herr \underline{K}eydana fährt einen \underline{G}olf.}}\\
+    2 & $(\forall x)[(G(x)\rightarrow M(x)\vee A(x)]$   &                     & \textit{\grau{\scriptsize Alles, was einen Golf fährt, ist entweder ein \underline{M}ensch oder eine \underline{A}I.}}\\
+    3 & $\neg(\exists y)[A(y)\wedge G(y)]$              & $\vdash(\exists z)M(z)$   & \textit{\grau{\scriptsize Es gibt keine AI, die einen Golf fährt.}} $\vdash$ \textit{\grau{\scriptsize Es gibt mindestens einen Menschen.}}\\
+    \cline{1-3}
+    \visible<3->{4 & $(\forall y)\neg[A(y)\wedge G(y)]$               & 3,QN & }\\
+    \visible<4->{5 & $(\forall y)[\neg A(y)\vee\neg G(y)]$           & 4,DeM & }\\
+    \visible<5->{6 & $(\forall y)[G(y)\rightarrow \neg A(y)]$        & 5,Komm.,Impl. & }\\
+    \visible<6->{7 & $G(k)\rightarrow \neg A(k)$                     & 6,$-\forall(1)$ & }\\
+    \visible<7->{8 & $\neg A(k)$                                     & 1,7,MP & }\\
+    \visible<8->{9 & $G(k)\rightarrow M(k)\vee A(k)$                 & 2,$-\forall(1)$ & }\\
+    \visible<9->{10& $M(k)\vee A(k)$                                 & 1,9,MP & }\\
+    \visible<10->{11& $M(k)$                                        & 8,10,DS & }\\
+    \visible<11->{12& $(\exists z)M(z)$                 & 11,$+\exists$ $\blacksquare$& }\\
+  \end{tabular}}
+\end{frame}
+
+\section{Aufgaben}
+
+\begin{frame}
+  {Aufgaben I | Quantorennegation}
+  \onslide<+->
+  \onslide<+->
+  \begin{enumerate}
+    \item Treffen die folgenden Behauptungen zu?\\
+      \Halbzeile
+      \begin{enumerate}
+        \item $\forall x \neg(P(x)\leftrightarrow Q(x))\equiv\neg\exists x\neg(P(x)\leftrightarrow Q(x))$
+        \item $\neg\neg\forall x(R(x)\vee\neg\neg S(x))\equiv\neg\exists x\neg (R(x)\vee S(x))$
+        \item $\exists x (P(x)\wedge P(x))\equiv\neg\forall x\neg P(x)$
+      \end{enumerate}
+      \Zeile
+    \item Versuchen Sie, intuitiv zu formulieren, warum die auf Folie~\ref{slide:quantoren} besprochene Einschränkung bei der Quantorenvertauschung besteht.
+      Gemeint ist: $\orongsch{(\forall x)(\exists y)}\phi\ \rot{\not\vdash}\ \orongsch{(\exists y)(\forall x)}\phi$
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}
+  {Aufgaben II | Natürliche Deduktion}
+  \onslide<+->
+  \begin{enumerate}
+    \item Alle L\"ugner sind unglaubw\"urdig. Einige L\"ugner sind Zugschaffner.\\ \alert{Zeigen/Widerlegen Sie: Einige Zugschaffner sind unglaubw\"urdig.}
+    \item Alle Flugzeuge sind Automaten. Einige Automaten sind besorgniserregend.\\ \alert{Zeigen/Widerlegen Sie: Einige Flugzeuge sind besorgniserregend.}
+    \item Kein K\"aufer wird betrogen. Einige K\"aufer sind auch H\"andler.\\ \alert{Zeigen/Widerlegen Sie: Einige H\"andler werden nicht betrogen.}
+\end{enumerate}
+ 
+\end{frame}

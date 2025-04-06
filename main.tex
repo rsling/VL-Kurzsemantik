@@ -1,0 +1,106 @@
+\def\GRAPHPATH{graphics}
+
+\ifdefined\HANDOUT
+  \documentclass[handout,aspectratio=1610,dvipsnames]{beamer}
+  \def\GRAPHPATH{graphics}
+\else
+  \documentclass[aspectratio=1610,dvipsnames]{beamer}
+\fi
+
+\input{localpackages.tex}
+\input{localcommands.tex}
+
+\ifdefined\TITLE
+  \title[Logik/Semantik | \letterssub{\TITLE}]{Minimale Logik und Semantik für die Sprachphilosophie\\\letterssub{\TITLE}}
+\else
+  \title[Logik/Semantik]{Minimale Logik und Semantik für die Sprachphilosophie}
+\fi
+
+\author{Roland Schäfer}
+\institute[FSU Jena]{Institut für Germanistische Sprachwissenschaft\\Friedrich-Schiller-Universität Jena}
+\date[\today]{\grau{Stets aktuelle Fassungen: \url{https://github.com/rsling/VL-Semantik}}}
+
+\begin{document}
+
+\begingroup
+  \setbeamertemplate{navigation symbols}{}
+  \begin{frame}[noframenumbering,plain,allowframebreaks]
+   \titlepage
+  \end{frame}
+  \begin{frame}{Inhalt}
+    \centering
+    \begin{minipage}{0.8\textwidth}
+        \begin{multicols}{2}
+          \tableofcontents
+        \end{multicols}
+    \end{minipage}
+  \end{frame}
+\endgroup
+
+\ifdefined\TITLE
+  \input{includes/\TITLE}
+\else
+  \section[Inferenz und Bedeutung]{Inferenz und Bedeutung}
+  \let\woopsi\section\let\section\subsection\let\subsection\subsubsection
+  \input{includes/01.+Inferenz+und+Bedeutung.tex}
+  \let\subsection\section\let\section\woopsi
+
+  \section[Mengen und Funktionen]{Mengen und Funktionen}
+  \let\woopsi\section\let\section\subsection\let\subsection\subsubsection
+  \input{includes/02.+Mengen+und+Funktionen.tex}
+  \let\subsection\section\let\section\woopsi
+
+  \section[Aussagenlogik]{Aussagenlogik}
+  \let\woopsi\section\let\section\subsection\let\subsection\subsubsection
+  \input{includes/03.+Aussagenlogik.tex}
+  \let\subsection\section\let\section\woopsi
+
+  \section[Prädikatenlogik]{Prädikatenlogik}
+  \let\woopsi\section\let\section\subsection\let\subsection\subsubsection
+  \input{includes/04.+Pr-adikatenlogik.tex}
+  \let\subsection\section\let\section\woopsi
+
+  \section[Typen und $\lambda$s]{Typen und $\lambda$s}
+  \let\woopsi\section\let\section\subsection\let\subsection\subsubsection
+  \input{includes/05.+Typen+und+Lambdas.tex}
+  \let\subsection\section\let\section\woopsi
+\fi
+
+
+\makeatletter
+\setcounter{lastpagemainpart}{\the\c@framenumber}
+\makeatother
+
+\appendix
+
+\begin{frame}[allowframebreaks]
+  {Literatur}
+  \renewcommand*{\bibfont}{\footnotesize}
+  \setbeamertemplate{bibliography item}{}
+  \printbibliography
+\end{frame}
+
+\begin{frame}
+  {Autor}
+  \begin{block}{Kontakt}
+    Prof.\ Dr.\ Roland Schäfer\\
+    Institut für Germanistische Sprachwissenschaft\\
+    Friedrich-Schiller-Universität Jena\\
+    Fürstengraben 30\\
+    07743 Jena\\[\baselineskip]
+    \url{https://rolandschaefer.net}\\
+    \texttt{roland.schaefer@uni-jena.de}
+  \end{block}
+\end{frame}
+
+\begin{frame}
+  {Lizenz}
+  \begin{block}{Creative Commons BY-SA-3.0-DE}
+    Dieses Werk ist unter einer Creative Commons Lizenz vom Typ \textit{Namensnennung - Weitergabe unter gleichen Bedingungen 3.0 Deutschland} zugänglich.
+    Um eine Kopie dieser Lizenz einzusehen, konsultieren Sie \url{http://creativecommons.org/licenses/by-sa/3.0/de/} oder wenden Sie sich brieflich an Creative Commons, Postfach 1866, Mountain View, California, 94042, USA.
+  \end{block}
+\end{frame}
+
+\mode<beamer>{\setcounter{framenumber}{\thelastpagemainpart}}
+
+\end{document}

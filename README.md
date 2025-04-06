@@ -1,2 +1,2 @@
-# VL-Kurzsemantik
-Kurze Version meiner Semantik-VL
+# VL-Semantik
+Total altmodische Einführung in die modelltheoretische Semantik (mit Typen)

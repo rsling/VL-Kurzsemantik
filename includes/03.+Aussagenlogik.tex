@@ -1,0 +1,795 @@
+\begin{frame}
+  {Kernfragen in dieser Woche}
+  \onslide<+->
+  \onslide<+->
+  \centering 
+  \Large
+  Was leistet eine \alert{Aussagenlogik} (und was nicht)?\\
+  \Halbzeile
+  \onslide<+->
+  Wann sind \alert{und}\slash\alert{oder}\slash\alert{wenn-dann}-Aussagen wahr oder falsch?\\
+  \Halbzeile
+  \onslide<+->
+  Wann sind logische Ausdrücke gleichbedeutend (äquivalent)?\\
+  \onslide<+->
+  \Halbzeile
+  Was darf man aus was \alert{folgern}?\\
+  \onslide<+->
+  \Halbzeile
+  \grau{\footnotesize Texte für heute: \citet[87-246]{ParteeEa1990}, selektiv auch \citet{Bucher1998}.}
+\end{frame}
+
+\section{Was ist Logik?}
+
+\begin{frame}
+  {Logik}
+  \onslide<+->
+  \onslide<+->
+  Wie Logiken funktionieren\\
+  \Halbzeile
+  \begin{itemize}[<+->]
+    \item Sammlungen von Aussagen bzw.\ \alert{Propositionen}
+    \item Axiome | als \alert{wahr angenommene} Aussagen
+      \begin{itemize}[<+->]
+        \item eventuell über Induktion gegeben
+        \item oder aus rein theoretischen Überlegungen abgeleitet
+      \end{itemize}
+    \item \alert{Deduktion} | Ableiten von Aussagen aus Axiomen
+    \item in der Wissenschaft damit \alert{Voraussagen} aus Axiomen
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  {Beweise}
+  \onslide<+->
+  \onslide<+->
+  Status von Aussagen in logischen Beweisen \ldots\\
+  \Halbzeile
+  \begin{itemize}[<+->]
+    \item \alert{Axiome} | atomare Wahrheiten (der Theorie oder des Diskurses)
+    \item \alert{Theorem} | eine Aussage, die bewiesen werden soll oder bewiesen wurde
+    \item \alert{Lemma} | ein nebensächliches bewiesenes Theorem
+    \item \alert{Korollar} | ein minderes Theorem im Rahmen einer Beweisführung
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  {Wozu Logik?}
+  \onslide<+->
+  \onslide<+->
+  Verständnis von der Welt in eine Form bringen \ldots\\
+  \Halbzeile
+  \begin{itemize}[<+->]
+    \item keine neuen Wahrheiten (Informationen) durch Logik
+    \item Verfahren zur \alert{Formalisierung von Aussagen}
+    \item \alert{Schlussregeln} zur Ableitung von Theoremen aus Axiomen
+    \item Untersuchung, \alert{inwieweit Sprache logischen Prinzipien folgt}
+    \item Wissenschaft
+      \begin{itemize}[<+->]
+        \item Hypothesengenerierung durch Induktion und Abduktion
+        \item \alert{Hypothesenprüfung} durch \alert{Deduktion} plus Testung
+        \item außerdem \alert{Prüfen auf Widerspruchsfreiheit}
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  {Warum Logik in der Semantik?}
+  \onslide<+->
+  \onslide<+->
+  Sprache ist nicht ohne Logik.\\
+  \Halbzeile
+  \begin{itemize}[<+->]
+    \item Aussagesätze haben \alert{Wahrheitsbedingungen}!
+    \item Sprache ist \alert{systematisch} und \alert{kompositional}!
+    \item Natürlichsprachliche Sätze \alert{folgen} aus anderen Sätzen!\\
+      \grau{\ldots\ wie Theoreme aus Axiomen \ldots}
+      \Halbzeile
+    \item Was das Gehirn damit macht, ist -- wie gesagt -- eine parallele Frage.
+  \end{itemize}
+\end{frame}
+
+\section{Aussagenlogik}
+
+\subsection{Rekursive Syntax}
+
+\begin{frame}
+  {Atomare Formeln}
+  \onslide<+->
+  \onslide<+->
+  Aussagenlogik | \alert{Formeln} als einzige syntaktische Kategorie\\
+  \Halbzeile
+  \begin{itemize}[<+->]
+    \item Syntax
+      \begin{itemize}[<+->]
+        \item \orongsch{keine syntaktische Analyse unterhalb der Ebene der Aussagen}
+        \item \alert{Atome} bzw.\ \alert{atomare Formeln} | Aussagen bzw.\ Propositionen
+        \item \it{Herr \underline{K}eydana is a passionate cyclist.}: $k$
+      \end{itemize}
+      \Halbzeile
+    \item \alert{Wahrheitswert} | Semantik einer Formel
+      \begin{itemize}[<+->]
+        \item $\dem{k}\in\{0,1\}$
+        \item Wenn Herr Keydana passionierter Radsportler ist, dann $\dem{k}=1$
+        \item \ldots\ sonst $\dem{k}=0$
+        \item $k$ ist \alert{kontingent} | wahr oder falsch je nach \alert{Modell}
+        \item Modell | Spezifikation von Wahrheitsbedingungen
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  {Komplexe (molekulare) Formeln}
+  \onslide<+->
+  \onslide<+->
+  Syntax aller \alert{wohlgeformten Formeln} bzw.\ \alert{Wffs}\\
+  \Halbzeile
+  \begin{itemize}[<+->]
+    \item Syntax | Wenn $p$ und $q$ Wffs sind, dann sind ebenfalls Wffs:
+      \Viertelzeile
+      \begin{itemize}[<+->]
+        \item<4-> $\alert{\neg}p$ \visible<10->{| \textit{nicht p}} \visible<15->{| \alert{Negation}}
+         \item<5-> $p\alert{\vee}q$ \visible<11->{| \textit{p oder q}} \visible<16->{| \alert{Disjunktion}}
+         \item<6-> $p\alert{\wedge}q$ \visible<12->{| \textit{p und q}} \visible<17->{| \alert{Konjunktion}}
+         \item<7-> $p\alert{\rightarrow}q$ \visible<13->{| \textit{wenn p dann q}} \visible<18->{| \alert{Konditional}}
+         \item<8-> $p\alert{\leftrightarrow}q$ \visible<14->{| \textit{p genau dann wenn q}} \visible<19->{| \alert{Bikonditional}}
+         \item<8-> \grau{Es gibt keine anderen Wffs in AL.}
+      \end{itemize}
+      \Halbzeile
+    \item<9-> Semantik | \alert{Funktoren} bezeichnen \alert{Funktionen}
+  \end{itemize}
+\end{frame}
+
+\subsection{Interpretation von Wffs}
+
+\begin{frame}
+  {Negation | Semantik von $\neg$}
+  \onslide<+->
+  \onslide<+->
+  \textit{Es ist nicht der Fall, dass p.}\\
+  \Halbzeile
+  \begin{itemize}[<+->]
+    \item Definition gemäß letzter Woche: \alert{$\dem{\neg}=\{\tuple{1,0},\tuple{0,1}\}$}
+      \Halbzeile
+    \item Typische Definition als Funktion\\
+      \begin{center}
+        $\dem{\neg} = \left[
+          \begin{array}{l}
+            1 \rightarrow 0\\
+            0 \rightarrow 1
+         \end{array}
+         \right]$
+      \end{center}
+      \Halbzeile
+    \item Typische Darstellung mit \alert{Wahrheitstafel}\\
+      \begin{center}
+        \begin{tabular}{cc}
+          $\neg$ & $p$\\
+          \hline
+          \alert{0} & 1 \\
+          \alert{1} & 0 \\
+        \end{tabular}
+      \end{center}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  {Diskjunktion | Semantik von $\vee$}
+  \onslide<+->
+  \onslide<+->
+  \textit{Es ist der Fall, dass p, dass q, oder dass p und q.}\\
+  \onslide<+->
+  \Halbzeile
+    \begin{center}
+      \begin{tabular}{ccc}
+        $p$ & $\vee$ & $q$\\
+        \hline
+        1 & \alert{1} & 1 \\
+        1 & \alert{1} & 0 \\
+        0 & \alert{1} & 1 \\
+        0 & \alert{0} & 0 \\
+      \end{tabular}
+    \end{center}
+    \Halbzeile
+    \begin{itemize}[<+->]
+      \item \it{Herr \underline{K}eydana is a passionate cyclist \alert{or} we all \underline{l}ove logic.}
+      \item \alert{$k\vee$l}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}
+  {Konjunktion | Semantik von $\wedge$}
+  \onslide<+->
+  \onslide<+->
+  \textit{Es ist der Fall, dass p, und dass q.}\\
+  \onslide<+->
+  \Halbzeile
+    \begin{center}
+      \begin{tabular}{ccc}
+        $p$ & $\wedge$ & $q$\\
+        \hline
+        1 & \alert{1} & 1 \\
+        1 & \alert{0} & 0 \\
+        0 & \alert{0} & 1 \\
+        0 & \alert{0} & 0 \\
+      \end{tabular}
+    \end{center}
+    \Halbzeile
+  \begin{itemize}[<+->]
+    \item \textit{Herr \underline{K}eydana is a passionate cyclist \alert{and} we all \underline{l}ove logic.}
+    \item \alert{$k\wedge$l}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  {Konditional | Semantik von $\rightarrow$}
+  \onslide<+->
+  \onslide<+->
+  \textit{Wenn q gilt, dann gilt q.}\\
+  \onslide<+->
+  \Halbzeile
+  \begin{center}
+    \begin{tabular}{ccc}
+      $p$ & $\rightarrow$ & $q$\\
+      \hline
+      1 & \alert{1} & 1 \\
+      1 & \alert{0} & 0 \\
+      0 & \alert{1} & 1 \\
+      0 & \alert{1} & 0 \\
+    \end{tabular}
+  \end{center}
+  \begin{itemize}[<+->]
+    \item \textit{\alert{If} it \underline{r}ains, \alert{then} the \underline{s}treets get wet.}
+    \item \alert{$r\rightarrow$s}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  {Ex falso sequitur quodlibet!}
+  \onslide<+->
+  \onslide<+->
+  \alert{\textit{If it rains, the streets get wet.}} $\vdash$? \orongsch{It doesn't rain, so the streets are dry.}\\
+  \Halbzeile
+  \begin{itemize}[<+->]
+    \item it is raining (\alert{1}) , the streets are wet (\alert{1}) : \alert{\textbf{1}}
+    \item it is raining (\alert{1}) , the streets are not wet (\alert{0}) : \alert{\textbf{0}}
+    \item \orongsch<7->{it is not raining (\alert{0}) , the streets are wet (\alert{1}) : \alert{\textbf{1}}}
+    \item \orongsch<7->{it is not raining (\alert{0}) , the streets are not wet (\alert{0}) : \alert{\textbf{1}}}
+      \Halbzeile
+    \item \textit{Ex falso sequitur quodlibet.} | \orongsch{Modus morons}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  {Bikonditional | Semantik von $\leftrightarrow$}
+  \onslide<+->
+  \onslide<+->
+  \textit{p ist der Fall genau dann, wenn q der Fall ist.}\\
+  \textit{Wenn p der Fall ist, dann ist q der Fall und umgekehrt.}\\
+  \onslide<+->
+  \Halbzeile
+  \begin{center}
+    \begin{tabular}{ccc}
+      $p$ & $\leftrightarrow$ & $q$\\
+      \hline
+      1 & \alert{1} & 1 \\
+      1 & \alert{0} & 0 \\
+      0 & \alert{0} & 1 \\
+      0 & \alert{1} & 0 \\
+    \end{tabular}
+  \end{center}
+  \Halbzeile
+  \begin{itemize}[<+->]
+    \item \textit{\alert{If and only if} your \underline{s}core is above 50, \alert{then} you \underline{p}ass the semantics exam.}
+    \item \alert{$s\leftrightarrow$p}
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}
+  {Skopus und Klammern}
+  \onslide<+->
+  \onslide<+->
+  Bindungsstärke der Funktoren\\
+  \onslide<+->
+  \Halbzeile
+  \begin{center}
+    \visible<4->{\textcolor{blue}{Skopus} }$\visible<4->{\left\downarrow} \begin{array}{c}
+      \neg \\
+      \wedge \\
+      \vee \\
+      \rightarrow \\
+      \leftrightarrow
+    \end{array} \visible<5->{\right\uparrow}
+      $ \visible<5->{\textcolor{blue}{Bindungsstärke}}
+  \end{center}
+\end{frame}
+
+\begin{frame}
+  {Hilfreiche überflüssige Klammern}
+  \onslide<+->
+  \onslide<+->
+  Die folgenden Wffs sind alle äquivalent.\\
+  \Zeile 
+  \begin{itemize}[<+->]
+    \item[ ] $p\wedge\neg q\vee r\rightarrow \neg s$
+    \item[$\equiv$] $p\wedge\gruen{(\neg} q\gruen{)}\vee r\rightarrow \gruen{(\neg} s\gruen{)}$
+    \item[$\equiv$] $\gruen{(}p\gruen{\wedge}(\neg q)\gruen{)}\vee r\rightarrow (\neg s)$
+    \item[$\equiv$] $\gruen{(}(p\wedge(\neg q))\gruen{\vee} r\gruen{)}\rightarrow (\neg s)$
+    \item[$\equiv$] $\gruen{(}((p\wedge(\neg q))\vee r)\gruen{\rightarrow} (\neg s)\gruen{)}$
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  {Große Wahrheitstabellen anlegen}
+  \onslide<+->
+  \onslide<+->
+  Berechenbarkeit der \alert{Länge der Tabelle} und \alert{volle Abdeckung aller Permutationen}\\
+  \Halbzeile
+  \begin{itemize}[<+->]
+    \item Länge der Tabelle | \alert{$2^n$ Zeilen} für \alert{$n$ atomare Wffs}
+      \Halbzeile
+    \item für jede atomare Wff $W_m$ mit $m\in\{1, .. n\}$
+      \begin{itemize}[<+->]
+        \item \alert{$2^{(n-m)}$ Einsen} gefolgt von \alert{$2^{(n-m)}$ Nullen}
+      \end{itemize}
+      \Halbzeile
+    \item Beispiel mit \alert{vier atomaren Wffs} $p,q,r,s$
+      \begin{itemize}[<+->]
+        \item für \alert{p} als $W_m$ mit \alert{$m=1$} | alternierende Blöcke von \alert{$2^{4-1}=2^{3}=8$} Einsen\slash Nullen
+        \item für \alert{q} als $W_m$ mit \alert{$m=2$} | alternierende Blöcke von \alert{$2^{4-2}=2^{2}=4$} Einsen\slash Nullen
+        \item für \alert{r} als $W_m$ mit \alert{$m=3$} | alternierende Blöcke von \alert{$2^{4-3}=2^{1}=2$} Einsen\slash Nullen
+        \item für \alert{s} als $W_m$ mit \alert{$m=4$} | alternierende Blöcke von \alert{$2^{4-4}=2^{0}=1$} Einsen\slash Nullen
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  {Ein Beispiel}
+  \onslide<+->
+  \onslide<+->
+  \centering 
+  \scalebox{0.9}{%
+    \begin{minipage}[h]{0.45\textwidth}
+      \begin{tabular}{ccccccccc}
+        $p$ & $\wedge$ & $\neg$ & $q$ & $\vee$ & $r$ & $\rightarrow$ & $\neg$ & $s$ \\
+        \hline
+        \visible<4->{\alert<4>{\orongsch<11>{1}}} & \visible<11->{\alert<11>{\orongsch<11,12>{0}}} & \visible<9->{\orongsch<9,11>{0}} & \visible<5->{\alert<5>{\orongsch<9>{1}}} & \visible<12->{\orongsch<12,13>{1}} & \visible<6->{\alert<6>{\orongsch<12>{1}}} & \visible<13->{\orongsch<13>{0}} & \visible<10->{\orongsch<10,13>{0}} & \visible<7->{\alert<7>{\orongsch<10>{1}}} \\
+        \visible<4->{\alert<4>{\orongsch<11>{1}}} & \visible<11->{\alert<11>{\orongsch<11,12>{0}}} & \visible<9->{\orongsch<9,11>{0}} & \visible<5->{\alert<5>{\orongsch<9>{1}}} & \visible<12->{\orongsch<12,13>{1}} & \visible<6->{\alert<6>{\orongsch<12>{1}}} & \visible<13->{\orongsch<13>{1}} & \visible<10->{\orongsch<10,13>{1}} & \visible<7->{\alert<7>{\orongsch<10>{0}}} \\
+        \visible<4->{\alert<4>{\orongsch<11>{1}}} & \visible<11->{\alert<11>{\orongsch<11,12>{0}}} & \visible<9->{\orongsch<9,11>{0}} & \visible<5->{\alert<5>{\orongsch<9>{1}}} & \visible<12->{\orongsch<12,13>{0}} & \visible<6->{\alert<6>{\orongsch<12>{0}}} & \visible<13->{\orongsch<13>{1}} & \visible<10->{\orongsch<10,13>{0}} & \visible<7->{\alert<7>{\orongsch<10>{1}}} \\
+        \visible<4->{\alert<4>{\orongsch<11>{1}}} & \visible<11->{\alert<11>{\orongsch<11,12>{0}}} & \visible<9->{\orongsch<9,11>{0}} & \visible<5->{\alert<5>{\orongsch<9>{1}}} & \visible<12->{\orongsch<12,13>{0}} & \visible<6->{\alert<6>{\orongsch<12>{0}}} & \visible<13->{\orongsch<13>{1}} & \visible<10->{\orongsch<10,13>{1}} & \visible<7->{\alert<7>{\orongsch<10>{0}}} \\
+        \visible<4->{\alert<4>{\orongsch<11>{1}}} & \visible<11->{\alert<11>{\orongsch<11,12>{1}}} & \visible<9->{\orongsch<9,11>{1}} & \visible<5->{\alert<5>{\orongsch<9>{0}}} & \visible<12->{\orongsch<12,13>{1}} & \visible<6->{\alert<6>{\orongsch<12>{1}}} & \visible<13->{\orongsch<13>{0}} & \visible<10->{\orongsch<10,13>{0}} & \visible<7->{\alert<7>{\orongsch<10>{1}}} \\
+        \visible<4->{\alert<4>{\orongsch<11>{1}}} & \visible<11->{\alert<11>{\orongsch<11,12>{1}}} & \visible<9->{\orongsch<9,11>{1}} & \visible<5->{\alert<5>{\orongsch<9>{0}}} & \visible<12->{\orongsch<12,13>{1}} & \visible<6->{\alert<6>{\orongsch<12>{1}}} & \visible<13->{\orongsch<13>{1}} & \visible<10->{\orongsch<10,13>{1}} & \visible<7->{\alert<7>{\orongsch<10>{0}}} \\
+        \visible<4->{\alert<4>{\orongsch<11>{1}}} & \visible<11->{\alert<11>{\orongsch<11,12>{1}}} & \visible<9->{\orongsch<9,11>{1}} & \visible<5->{\alert<5>{\orongsch<9>{0}}} & \visible<12->{\orongsch<12,13>{1}} & \visible<6->{\alert<6>{\orongsch<12>{0}}} & \visible<13->{\orongsch<13>{0}} & \visible<10->{\orongsch<10,13>{0}} & \visible<7->{\alert<7>{\orongsch<10>{1}}} \\
+        \visible<4->{\alert<4>{\orongsch<11>{1}}} & \visible<11->{\alert<11>{\orongsch<11,12>{1}}} & \visible<9->{\orongsch<9,11>{1}} & \visible<5->{\alert<5>{\orongsch<9>{0}}} & \visible<12->{\orongsch<12,13>{1}} & \visible<6->{\alert<6>{\orongsch<12>{0}}} & \visible<13->{\orongsch<13>{1}} & \visible<10->{\orongsch<10,13>{1}} & \visible<7->{\alert<7>{\orongsch<10>{0}}} \\
+        \visible<4->{\alert<4>{\orongsch<11>{0}}} & \visible<11->{\alert<11>{\orongsch<11,12>{0}}} & \visible<9->{\orongsch<9,11>{0}} & \visible<5->{\alert<5>{\orongsch<9>{1}}} & \visible<12->{\orongsch<12,13>{1}} & \visible<6->{\alert<6>{\orongsch<12>{1}}} & \visible<13->{\orongsch<13>{0}} & \visible<10->{\orongsch<10,13>{0}} & \visible<7->{\alert<7>{\orongsch<10>{1}}} \\
+        \visible<4->{\alert<4>{\orongsch<11>{0}}} & \visible<11->{\alert<11>{\orongsch<11,12>{0}}} & \visible<9->{\orongsch<9,11>{0}} & \visible<5->{\alert<5>{\orongsch<9>{1}}} & \visible<12->{\orongsch<12,13>{1}} & \visible<6->{\alert<6>{\orongsch<12>{1}}} & \visible<13->{\orongsch<13>{1}} & \visible<10->{\orongsch<10,13>{1}} & \visible<7->{\alert<7>{\orongsch<10>{0}}} \\
+        \visible<4->{\alert<4>{\orongsch<11>{0}}} & \visible<11->{\alert<11>{\orongsch<11,12>{0}}} & \visible<9->{\orongsch<9,11>{0}} & \visible<5->{\alert<5>{\orongsch<9>{1}}} & \visible<12->{\orongsch<12,13>{0}} & \visible<6->{\alert<6>{\orongsch<12>{0}}} & \visible<13->{\orongsch<13>{1}} & \visible<10->{\orongsch<10,13>{0}} & \visible<7->{\alert<7>{\orongsch<10>{1}}} \\
+        \visible<4->{\alert<4>{\orongsch<11>{0}}} & \visible<11->{\alert<11>{\orongsch<11,12>{0}}} & \visible<9->{\orongsch<9,11>{0}} & \visible<5->{\alert<5>{\orongsch<9>{1}}} & \visible<12->{\orongsch<12,13>{0}} & \visible<6->{\alert<6>{\orongsch<12>{0}}} & \visible<13->{\orongsch<13>{1}} & \visible<10->{\orongsch<10,13>{1}} & \visible<7->{\alert<7>{\orongsch<10>{0}}} \\
+        \visible<4->{\alert<4>{\orongsch<11>{0}}} & \visible<11->{\alert<11>{\orongsch<11,12>{0}}} & \visible<9->{\orongsch<9,11>{1}} & \visible<5->{\alert<5>{\orongsch<9>{0}}} & \visible<12->{\orongsch<12,13>{1}} & \visible<6->{\alert<6>{\orongsch<12>{1}}} & \visible<13->{\orongsch<13>{0}} & \visible<10->{\orongsch<10,13>{0}} & \visible<7->{\alert<7>{\orongsch<10>{1}}} \\
+        \visible<4->{\alert<4>{\orongsch<11>{0}}} & \visible<11->{\alert<11>{\orongsch<11,12>{0}}} & \visible<9->{\orongsch<9,11>{1}} & \visible<5->{\alert<5>{\orongsch<9>{0}}} & \visible<12->{\orongsch<12,13>{1}} & \visible<6->{\alert<6>{\orongsch<12>{1}}} & \visible<13->{\orongsch<13>{1}} & \visible<10->{\orongsch<10,13>{1}} & \visible<7->{\alert<7>{\orongsch<10>{0}}} \\
+        \visible<4->{\alert<4>{\orongsch<11>{0}}} & \visible<11->{\alert<11>{\orongsch<11,12>{0}}} & \visible<9->{\orongsch<9,11>{1}} & \visible<5->{\alert<5>{\orongsch<9>{0}}} & \visible<12->{\orongsch<12,13>{0}} & \visible<6->{\alert<6>{\orongsch<12>{0}}} & \visible<13->{\orongsch<13>{1}} & \visible<10->{\orongsch<10,13>{0}} & \visible<7->{\alert<7>{\orongsch<10>{1}}} \\
+        \visible<4->{\alert<4>{\orongsch<11>{0}}} & \visible<11->{\alert<11>{\orongsch<11,12>{0}}} & \visible<9->{\orongsch<9,11>{1}} & \visible<5->{\alert<5>{\orongsch<9>{0}}} & \visible<12->{\orongsch<12,13>{0}} & \visible<6->{\alert<6>{\orongsch<12>{0}}} & \visible<13->{\orongsch<13>{1}} & \visible<10->{\orongsch<10,13>{1}} & \visible<7->{\alert<7>{\orongsch<10>{0}}} \\
+      \end{tabular}%
+    \end{minipage}%
+  }%
+  \scalebox{0.8}{%
+    \begin{minipage}[h]{0.6\textwidth}
+      \begin{itemize}
+        \item<3-> Tabelle vorbereiten
+          \Halbzeile
+          \begin{itemize}[<+->]
+            \item<4-> für \alert{p} | \alert{$2^{4-1}=2^{3}=8$} Einsen\slash Nullen
+            \item<5-> für \alert{q} | \alert{$2^{4-2}=2^{2}=4$} Einsen\slash Nullen
+            \item<6-> für \alert{r} | \alert{$2^{4-3}=2^{1}=2$} Einsen\slash Nullen
+            \item<7-> für \alert{s} | \alert{$2^{4-4}=2^{0}=1$} Einsen\slash Nullen
+          \end{itemize}
+          \Zeile
+        \item<8-> Wahrheitswerte ermitteln\\
+          \grau{entsprechend Funktorenskopus}
+          \Halbzeile
+          \begin{itemize}[<+->]
+            \item<9-> für  \orongsch<9>{$\neg q$}
+            \item<10-> für \orongsch<10>{$\neg s$}
+            \item<11-> für \orongsch<11>{$p\wedge\neg q$}
+            \item<12-> für \orongsch<12>{$p\wedge\neg q\vee r$}
+            \item<13-> für \orongsch<13>{$p\wedge\neg q\vee r\rightarrow\neg s$}
+          \end{itemize}
+      \end{itemize}
+    \end{minipage}%
+  }
+\end{frame}
+
+\begin{frame}
+  {Tautologie, Kontradiktion, Kontingenz}
+  \onslide<+->
+  \onslide<+->
+  Wann können oder müssen Wffs wahr oder falsch sein?\\
+  \Halbzeile
+  \begin{itemize}[<+->]
+    \item \alert{Tautologie} = immer wahr | Beispiel \alert{$p\vee\neg p$}
+      \begin{itemize}[<+->]
+        \item[ ] \scalebox{0.7}{\begin{tabular}{cccc}
+                           $p$ & $\vee$ & $\neg$ & $p$\\
+                           \hline
+                           \alert{1} & \gruen{1} & \orongsch{0} & \alert{1} \\
+                           \alert{0} & \gruen{1} & \orongsch{1} & \alert{0} \\
+                          \end{tabular}}
+      \end{itemize}
+    \item \alert{Kontradiktion} = immer falsch | Beispiel \alert{$p\wedge\neg p$}
+      \begin{itemize}[<+->]
+        \item[ ] \scalebox{0.7}{\begin{tabular}{cccc}
+                           $p$ & $\wedge$ & $\neg$ & $p$\\
+                           \hline
+                           \alert{1} & \gruen{0} & \orongsch{0} & \alert{1} \\
+                           \alert{0} & \gruen{0} & \orongsch{1} & \alert{0} \\
+                          \end{tabular}}
+      \end{itemize}
+    \item \alert{Kontingenz} = \gruen{je nach Modell wahr oder falsch} | Beispiel \alert{$p\wedge p$}
+      \begin{itemize}[<+->]
+        \item[ ] \scalebox{0.7}{\begin{tabular}{ccc}
+                           $p$ & $\wedge$ & $p$\\
+                           \hline
+                           \alert{1} & \gruen{1} & \alert{1} \\
+                           \alert{0} & \gruen{0} & \alert{0} \\
+                          \end{tabular}}
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\subsection{Gesetze der Aussagenlogik}
+
+\begin{frame}
+  {Was heißt Gesetze?}
+  \label{slide:scheffer}
+  \onslide<+->
+  \onslide<+->
+  Aus Mengenlehre und Arithmetik bekannt: Assoziativität, Kommutativität usw.\\
+  \onslide<+->
+  \alert{Gesetze als Formulierung bekannter Äquivalenzen \grau{($\equiv$ oder $\Leftrightarrow$)}}\\
+  \Halbzeile
+  \begin{itemize}[<+->]
+    \item Wffs mit stets gleicher Interpretation\\
+      \alert{X $\equiv$ Y}: X hat dieselben Wahrheitsbedingungen wie Y
+    \item Regeln zum wahrheitswertkonservativen Umschreiben komplexer Wffs
+    \item Parallelen zur Mengenlehre offensichtlich\\
+      \grau{(mit den zugrundeliegenden algebraischen Formalisierungen erst recht)}
+      \Halbzeile
+    \item Alle Funktoren lassen sich aus \alert{einem Funktor} ableiten.
+      \begin{itemize}[<+->]
+        \item[ ] Scheffer-Strich (NAND, \textit{nicht-und}; vgl.\ auch Peirce-Funktor)\\
+          \scalebox{0.7}{\begin{tabular}{cccp{1em}cp{1em}ccccc}
+            $p$ & $|$ & $q$ && $\equiv$ && $\neg$ & $(p$ & $\wedge$ & $q)$\\
+            \hline
+            \alert{1} & \gruen{0} & \alert{1} &&&& \gruen{0} & \alert{1} & \orongsch{1} & \alert{1} \\
+            \alert{1} & \gruen{1} & \alert{0} &&&& \gruen{1} & \alert{1} & \orongsch{0} & \alert{0} \\
+            \alert{0} & \gruen{1} & \alert{1} &&&& \gruen{1} & \alert{0} & \orongsch{0} & \alert{1} \\
+            \alert{0} & \gruen{1} & \alert{0} &&&& \gruen{1} & \alert{0} & \orongsch{0} & \alert{0} \\
+          \end{tabular}}
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  {Eher triviale Äquivalenzregeln}
+  \onslide<+->
+  \onslide<+->
+  \centering 
+  \scalebox{0.65}{%
+    \begin{tabular}[h]{llll}
+       \alert{Idempotenz}        & \alert{$p\vee p\equiv p$}                                  & $P\cup P=P$                                 & \textit{They talk or they talk.} \\
+                                 & $p\wedge p\equiv p$                                        & $P\cap P=P$                                 & \textit{They talk and they talk.} \\
+       \alert{Assoziativität}    & \alert{$(p\vee q)\vee r \equiv p\vee (q\vee r)$}           & $(P\cup Q)\cup R=P\cup (Q\cup R)$           & \textit{\orongsch{(}He walks or \gruen{(}she talks\orongsch{)} or we walk\gruen{)}.} \\
+                                 & $(p\wedge q)\wedge r \equiv p\wedge (q\wedge r)$           & $(P\cap Q)\cap R=P\cap (Q\cap R)$           & \textit{\orongsch{(}He walks and \gruen{(}she talks\orongsch{)} and we walk\gruen{)}.} \\
+       \alert{Kommutativität}    & \alert{$p\vee q \equiv q\vee p$}                           & $P\cup Q=Q\cup P$                           & \textit{Peter walks or Sue snores.} $\equiv$\\
+                                 &                                                            &                                             & \textit{Sue snores or Peter walks.}  \\
+                                 & $p\wedge q \equiv q\wedge p$                               & $P\cap Q=Q\cap P$                           & \textit{Peter walks and Sue snores.} $\equiv$ \\
+                                 &                                                            &                                             & \textit{Sue snores and Peter walks.}  \\
+       \alert{Distributivität}   & \alert{$p\vee(q\wedge r) \equiv (p\vee q)\wedge(p\vee r)$} & $P\cup(Q\cap R)=(P\cup Q)\cap(P\cup R)$     & \textit{(Sue snores) and (Peter walks or we talk).} $\equiv$ \\
+                                 &                                                            &                                             & \textit{(Sue snores and Peter walks) or} \\
+                                 &                                                            &                                             & \textit{(Sue snores and we talk).} \\
+                                 & $p\wedge(q\vee r) \equiv (p\wedge q)\vee(p\wedge r)$       & $P\cap(Q\cup R)=(P\cap Q)\cup(P\cap R)$     &  \\
+       \alert{DeMorgan}          & \alert{$\neg(p\vee q)\equiv\neg p\wedge\neg q$}            & $(P\cup Q)\Prm=P\Prm\cap Q\Prm$             &  \\
+                                 & $\neg(p\wedge q)\equiv\neg p\vee\neg q$                    & $(P\cap Q)\Prm=P\Prm\cup Q\Prm$             &  \\
+             Komplementgesetze   &&& \\
+       -- \alert{Tautologie}     & \alert{$p\vee\neg p\equiv\textbf{T}$} && \\
+       -- \alert{Kontradiktion}  & \alert{$p\wedge\neg p\equiv\textbf{F}$} && \\
+       -- \alert{Doppelnegation} & \alert{$\neg\neg p\equiv p$} && \\
+    \end{tabular}%
+  }\\
+  \Halbzeile 
+  \onslide<+->
+  \raggedleft
+  \scriptsize \textbf{T} für Tautologie ($\dem{\textbf{T}}=1$), \textbf{F} für Kontradiktion ($\dem{\textbf{F}}=0$)\\
+  alternative Notation für DeMorgan: $\overline{p\vee q}\equiv\overline{p}\wedge\overline{q}$\\
+  folgt aus DeMorgan: $\overline{\overline{p}\vee\overline{q}}\equiv\overline{\overline{p}}\wedge\overline{\overline{q}}\equiv p\wedge q$
+\end{frame}
+
+\begin{frame}
+  {Konditionalgesetze}
+  \onslide<+->
+  \onslide<+->
+  \alert{Implikation (Impl.)}\\
+  \onslide<+->
+  \begin{center}
+    \begin{tabular}{cccccccc}
+      $P$ & $\rightarrow$ & $Q$ & $\equiv$ & $\neg$ & $P$ & $\vee$ & $Q$ \\
+      \hline
+      \alert{1} & \gruen{1} & \alert{1} &   & \orongsch{0} & \alert{1} & \gruen{1} & \alert{1} \\
+      \alert{1} & \gruen{0} & \alert{0} &   & \orongsch{0} & \alert{1} & \gruen{0} & \alert{0} \\
+      \alert{0} & \gruen{1} & \alert{1} &   & \orongsch{1} & \alert{0} & \gruen{1} & \alert{1} \\
+      \alert{0} & \gruen{1} & \alert{0} &   & \orongsch{1} & \alert{0} & \gruen{1} & \alert{0} \\
+    \end{tabular}
+  \end{center}
+  \Halbzeile
+  \onslide<+->
+  \alert{Kontraposition (Kontr.)}\\
+  \onslide<+->
+  \begin{center}
+    \begin{tabular}{ccccccccc}
+      $P$ & $\rightarrow$ & $Q$ & $\equiv$ & $\neg$ & $Q$ & $\rightarrow$ & $\neg$ & $P$ \\
+      \hline
+      \alert{1} & \gruen{1} & \alert{1} &   & \orongsch{0} & \alert{1} & \gruen{1} & \orongsch{0} & \alert{1} \\
+      \alert{1} & \gruen{0} & \alert{0} &   & \orongsch{1} & \alert{0} & \gruen{0} & \orongsch{0} & \alert{1} \\
+      \alert{0} & \gruen{1} & \alert{1} &   & \orongsch{0} & \alert{1} & \gruen{1} & \orongsch{1} & \alert{0} \\
+      \alert{0} & \gruen{1} & \alert{0} &   & \orongsch{1} & \alert{0} & \gruen{1} & \orongsch{1} & \alert{0} \\
+    \end{tabular}
+  \end{center}
+\end{frame}
+
+\subsection{Schlussregeln}
+
+\begin{frame}
+  {Echte Schlussregeln}
+  \onslide<+->
+  \onslide<+->
+  Feste Regeln für \alert{Deduktionsschlüsse aus Prämissen}\\
+  \Halbzeile
+  \begin{itemize}[<+->]
+    \item alle obigen Regeln | \alert{Äquivalenzregeln} (= Umformungsregeln) für einzelne Wffs
+    \item Schlussregeln
+      \begin{itemize}[<+->]
+        \item Schließen aus \alert{Mengen von Prämissen}
+        \item kein neues Wissen, aber \alert{Erschließen existierenden Wissens}
+        \item nicht naturgegeben | zahlreiche \alert{alternative Logiken}
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  {Modus ponens (MP)}
+  \onslide<+->
+  \onslide<+->
+  Eine \alert{Implikation} (Antezedens $\rightarrow$ Konsequenz) und \alert{ihr Antezedens} sind gegeben.\\
+  \onslide<+->
+  \Zeile
+  \rule{3em}{0em}\scalebox{0.7}{%
+    \begin{tabular}[h]{cll}
+      & \alert{$p\rightarrow q$} & Prämisse 1 \\
+      & \alert{$p$}              & Prämisse 2 \\
+      \cline{1-2}
+      \gruen{$\vdash$} & \gruen{q} & Schluss \\
+    \end{tabular}%
+  }\\
+  \Doppelzeile 
+  \onslide<+->
+  Beispiel mit natürlichsprachlichem Material\\
+  \Zeile
+  \rule{3em}{0em}\scalebox{0.7}{%
+    \begin{tabular}[h]{cll}
+      (1) & \alert{\textit{If It rains, the streets get wet.}} & \\
+      (2) & \alert{\textit{It is raining.}}                   & \\
+      \cline{1-2}
+      \alert{$\vdash$} & \gruen{\textit{The streets are getting wet.}} & 1,2,MP \\
+    \end{tabular}%
+  }
+\end{frame}
+
+\begin{frame}
+  {Eine Illustration des MP an der Wahrheitstabelle}
+  \onslide<+->
+  \onslide<+->
+  Prämissen werden immer als wahr angenommen! Sonst wären es keine.\\
+  \onslide<+->
+  \Doppelzeile
+  \centering 
+  \scalebox{1.0}{%
+    \begin{minipage}[h]{0.5\textwidth}
+      \centering 
+      \begin{tabular}{lll}
+        $p$ & $\rightarrow$ & $q$ \\
+        \alert<8->{1} & \alert<8->{1} & \gruen<8->{1} \\
+        \dgrau<5->{1} & \orongsch<5->{0} & \dgrau<5->{0} \\
+        \rot<7->{0} & \dgrau<7->{1} & \dgrau<7->{1} \\
+        \rot<7->{0} & \dgrau<7->{1} & \dgrau<7->{0} \\
+      \end{tabular}%
+    \end{minipage}
+  }\scalebox{0.8}{%
+    \begin{minipage}[h]{0.6\textwidth}
+      \begin{itemize}[<+->]
+        \item Prämisse 1 ($p\rightarrow q$) muss wahr sein, \ldots
+        \item \ldots\ also Zeilen mit \orongsch{0} für streichen!
+          \Halbzeile
+        \item Prämisse 2 ($p$) muss wahr sein, \ldots
+        \item \ldots\ also Zeilen mit \rot{0} streichen
+          \Halbzeile
+        \item Es bleibt nur noch \gruen{eine Zeile, in der $\dem{q}=1$}
+      \end{itemize}
+  \end{minipage}%
+  }
+\end{frame}
+
+
+\begin{frame}
+  {Modus tollens (MT)}
+  \onslide<+->
+  \onslide<+->
+  Eine \alert{Implikation} und die \alert{Negation ihrer Konsequenz} sind gegeben.\\
+  \onslide<+->
+  \Doppelzeile
+  \rule{3em}{0em}\scalebox{0.7}{%
+    \begin{tabular}[h]{cll}
+      & \alert{$p\rightarrow q$} & Prämisse 1 \\
+      & \alert{$\neg q$}         & Prämisse 2 \\
+      \cline{1-2}
+      \gruen{$\vdash$} & \gruen{$\neg p$} & Schluss \\
+    \end{tabular}%
+  }\\
+  \Doppelzeile 
+  \onslide<+->
+  Illustration an der Wahrheitstafel\\
+  \Zeile 
+  \rule{3em}{0em}\scalebox{0.7}{%
+    \begin{tabular}{cccc}
+      $P$ & $\rightarrow$ & $Q$ &  \\
+      \dgrau{1} & \dgrau{1} & \rot{1} & ausgeschlossen durch Prämisse 2 \\
+      \dgrau{1} & \orongsch{0} & \dgrau{0} & ausgeschlossen durch Prämisse 1 \\
+      \dgrau{0} & \dgrau{1} & \rot{1} & ausgeschlossen durch Prämisse 2 \\
+      \gruen{0} & \alert{1} & \alert{0} & \\
+    \end{tabular}%
+  }
+\end{frame}
+
+
+\begin{frame}
+  {Die Syllogismen}
+  \onslide<+->
+  \onslide<+->
+  \alert{Hypothetischer Syllogismus} (HS) | \alert{Verkettung} von zwei \alert{Implikationen}\\
+  \Halbzeile
+  \begin{itemize}[<+->]
+    \item $\alert{p\rightarrow q, q\rightarrow r} \vdash \gruen{p\rightarrow r}$
+      \Viertelzeile
+    \item Beispiel in natürlicher Sprache
+      \begin{itemize}[<+->]
+        \item \textit{If it rains, the streets get wet.}
+        \item \textit{If the streets get wet, it smells nice.}
+        \item $\vdash$ \textit{If it rains, it smells nice.}
+      \end{itemize}
+  \end{itemize}
+  \Zeile
+  \onslide<+->
+  \alert{Disjunktiver Syllogismus} (DS) | Eine \alert{Disjunktion} und die \alert{Negation eines ihrer Disjunkte}\\
+  \Halbzeile
+  \begin{itemize}[<+->]
+    \item $\alert{p\vee q, \neg p} \vdash \gruen{q}$
+      \Viertelzeile
+    \item Beispiel in natürlicher Sprache
+      \begin{itemize}[<+->]
+        \item \textit{Either Peter sleeps or Peter is awake.}
+        \item \textit{Peter isn't awake.}
+        \item $\vdash$ \textit{Peter sleeps.}
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  {Triviale Regeln}
+  \begin{itemize}[<+->]
+    \item \alert{Simplifikation (Simp.)}:
+      \begin{itemize}
+        \item \alert{$p\wedge q\vdash\gruen{p, q}$}
+        \item \emph{It is raining and the sun is shining. $\vdash$ It is raining.}
+      \end{itemize}
+      \Halbzeile
+    \item \alert{Konjunktion (Konj.)}:
+      \begin{itemize}
+        \item \alert{$p, q\vdash\gruen{p\wedge q}$}
+        \item \emph{It is raining. The sun is shining. $\vdash$ It is raining and the sun is shining.}
+      \end{itemize}
+      \Halbzeile
+    \item \alert{Addition (Add.)}:
+      \begin{itemize}
+        \item \alert{$p\vdash\gruen{p\vee q}$}
+        \item \emph{It is raining. $\vdash$ It is raining or the sun is shining.}
+        \item Und was ist, wenn $q$ durch eine andere Prämisse als wahr oder falsch bekannt ist?
+      \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\subsection{Beweise in der Aussagenlogik}
+
+\begin{frame}
+  {Ein Beweis}
+  \onslide<+->
+  \onslide<+->
+  Schritte zur Beweisführung\\
+  \Halbzeile
+  \begin{enumerate}[<+->]
+    \item Prämissen formalisieren | eine atomare Wff (Buchstabe) pro atomarer Aussage
+    \item zu beweisende Aussage (Schlussfolgerung) notieren
+    \item aus den Prämissen und Schlussregeln versuchen, zur Schlussfolgerung zu kommen
+  \end{enumerate}
+  \Halbzeile
+  \begin{itemize}[<+->]
+    \item keine exakte Wissenschaft, erfordert Übung und Intuition
+    \item automatische Schlussverfahren (Tableaux) verfügbar \citep{ParteeEa1990}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  {Ein Beispielbeweis}
+  \onslide<+->
+  \onslide<+->
+  \gruen<4->{Wenn} es \alert<5->{regnet}, \gruen<4->{dann} \orongsch<6->{ist es nicht der Fall, dass} die Sonne \alert<7->{scheint} \gruen<8->{oder} der Wind \orongsch<9->{nicht} \alert<10->{bläst}.
+  Es \alert<12->{regnet}.
+  Zeigen Sie: Die Sonne \alert<14->{scheint} \orongsch<15->{nicht}.
+  \Halbzeile
+  \begin{itemize}[<+->]
+    \item erste Prämisse | $\visible<5->{\alert{r}}\visible<4->{\gruen{\rightarrow}}\visible<6->{\orongsch{\neg}(}\visible<7->{\alert{s}}\visible<8->{\gruen{\vee}}\visible<9->{\orongsch{\neg}}\visible<10->{\alert{b}}\visible<6->{)}$
+    \item<11-> zweite Prämisse | \visible<12->{\alert{$r$}}
+    \item<13-> Schlussfolgerung | $\visible<15->{\orongsch{\neg}} \visible<14->{\alert{s}}$
+  \end{itemize}
+  \Zeile
+  \centering 
+  \onslide<15->
+  \begin{tabular}{rll}
+      \visible<16->{1 & $r\rightarrow\neg (s\vee \neg b)$ & \\}
+      \visible<17->{2 & $r$ & $\vdash \neg s$ \\
+      \hline}
+      \visible<18->{3 & $\neg(s\vee \neg b)$ & 1,2,MP} \\
+        \visible<19->{4 & $\neg s\wedge b$ & 3,DeM} \\
+        \visible<20->{5 & $\neg s$ & 4,Simp. $\blacksquare$} \\
+  \end{tabular}
+\end{frame}
+
+\section{Aufgaben}
+
+\begin{frame}
+  {Aufgaben I}
+  \begin{enumerate}\footnotesize
+    \item Versuchen Sie, nur mittels des Scheffer-Strichs (s.\ Folie~\ref{slide:scheffer}) die Wahrheitstabellen für $\neg p$, $p\vee q$, $p\wedge q$ und $p\rightarrow q$ zu rekonstruieren.
+      Das ergibt nur einen Sinn, wenn Sie es selbst versuchen.
+      Sie haben mehr davon, wenn Sie daran scheitern, als wenn Sie gleich Wikipedia nehmen.
+  \end{enumerate}
+\end{frame}
+
+
+\begin{frame}
+  {Aufgaben II}
+  Versuchen Sie sich an folgenden vier Beweisen.\\
+  \Halbzeile
+  Hinweis: Sie benötigen, soweit ich sehe, nur die folgenden Schlussregeln:
+  \Viertelzeile
+  \begin{itemize}\footnotesize
+    \item Simp. | Simplifikation (auch Konjunktionsreduktion o.\"a.)
+    \item MT | Modus Tollens
+    \item MP | Modus Ponens
+    \item DS | Disjunktiver Syllogismus
+    \item Konj. | Konjunktionsregel
+  \end{itemize}
+  \Halbzeile
+  \begin{enumerate}\footnotesize
+    \item Der Beweis ist sophistisch, oder Achilles holt die Schildkr\"ote ein. Wenn Achilles die Schildkr\"ote einholt, dann versagt die Logik. Die Mathematiker haben alles gepr\"uft, und die Logik versagt nicht. \textbf{Zeigen/Widerlegen Sie: Der Beweis ist sophistisch.}
+  \end{enumerate}
+\end{frame}
+
+\begin{frame}
+  {Aufgaben II}
+  \begin{enumerate}\setcounter{enumi}{1}\footnotesize
+    \item Pettenkofer lebte weiter, oder seine Hypothese versagte. Wenn die Hypothese versagte, dann wurde Pettenkofer in der Hygiene abgeschrieben. Er schluckte \"offentlich eine Kultur Cholerabakterien und wurde in der Hygiene nicht abgeschrieben. \textbf{Zeigen/Widerlegen Sie: Pettenkofer lebte weiter.}
+    \item Der Fischer trinkt gerne Wein, und der M\"uller singt im M\"annerchor. Wenn der Veganladenbesitzer Hausbesitzer ist, dann w\"ahlt er nicht die Linkspartei. Der Veganladenbesitzer ist Hausbesitzer, oder der M\"uller singt nicht im M\"annerchor. \textbf{Zeigen/Widerlegen Sie: Der Fischer trinkt gern ein Glas Wein, und der Veganladenbesitzer w\"ahlt nicht die Linkspartei.}
+    \item Wenn Schopenhauer so fr\"uh aufstand wie Kant, dann hat er ihn in dieser Hinsicht gut nachgeahmt. Schopenhauer war eingebildet, liebte die Demokratie nicht, und er hatte Wutanf\"alle. In einem Wutausbruch warf er die N\"aherin die Stiege hinunter. Er stand so fr\"uh auf wie Kant, oder er war nicht eingebildet. \textbf{Zeigen/Widerlegen Sie: Schopenhauer hat die N\"aherin die Stiege hinuntergeworfen, und er hat Kant im Fr\"uhaufstehen gut nachgeahmt.}
+  \end{enumerate}
+\end{frame}
+
