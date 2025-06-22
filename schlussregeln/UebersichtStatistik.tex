@@ -1,0 +1,155 @@
+\documentclass[10.5pt,oneside,a4paper]{paper}
+\usepackage[a4paper,left=2cm,right=2cm,top=2cm,bottom=1cm]{geometry}
+\usepackage{setspace}
+
+\usepackage[ngerman]{babel}
+
+\usepackage{graphicx}
+\usepackage{multirow}
+\usepackage[table]{xcolor}
+
+\usepackage{rotating}
+\usepackage{nicefrac}
+\usepackage{csquotes}
+\usepackage{fontspec}
+\usepackage{libertine}
+\setmonofont{Inconsolata-g}
+\usepackage[libertine]{newtxmath}
+\newcommand{\fontpath}{/Users/roland/Library/Fonts/}
+\setsansfont[
+	  %Ligatures={TeX,Common},		% not supported by ttf
+	  Scale=MatchLowercase,
+	  Path=\fontpath,
+	  BoldFont = Arimo-Bold_B.ttf ,
+	  ItalicFont = Arimo-Italic_B.ttf ,				
+	  BoldItalicFont = Arimo-BoldItalic_B.ttf 		
+	  ]{Arimo_B.ttf}
+\setmainfont[
+	  Ligatures={TeX,Common},
+	  Path=\fontpath,
+	  PunctuationSpace=0,
+	  Numbers={Proportional},
+	  BoldFont = LinLibertine_RZ_B.otf ,
+	  ItalicFont = LinLibertine_RI_B.otf ,
+	  BoldItalicFont = LinLibertine_RZI_B.otf,
+	  BoldSlantedFont = LinLibertine_RZ_B.otf,
+	  SlantedFont    = LinLibertine_R_B.otf,
+	  SlantedFeatures = {FakeSlant=0.25},
+	  BoldSlantedFeatures = {FakeSlant=0.25},
+	  SmallCapsFeatures = {FakeSlant=0},
+	  ]{LinLibertine_R_B.otf}
+
+\pagestyle{plain}
+\singlespacing
+
+\author{\normalsize }
+\title{\large Übersicht Schlussregeln (Version \today)}
+\date{\today}
+
+\definecolor{lg}{rgb}{.8,.8,.8}
+\newcommand{\Dim}{\cellcolor{lg}}
+
+\newcommand{\alert}[1]{\textbf{#1}}
+\newcommand{\orongsch}[1]{#1}
+\newcommand{\gruen}[1]{#1}
+
+\newcommand{\hstrut}[1]{\hspace{#1pt}}
+
+\newcommand{\Prm}[0]{^{\prime}}
+
+\begin{document}
+
+\thispagestyle{empty}
+\noindent \textbf{\sffamily\large Übersicht Schlussregeln (Version \today)}\\
+\noindent {\sffamily Roland Schäfer, FSU Jena, Germanistische Sprachwissenschaft}
+
+\section{Einfache Äquivalenzregeln}
+
+    \begin{tabular}[h]{p{0.4\textwidth}p{0.2\textwidth}cl}
+       \alert{Idempotenz (Id.)}         & $p\vee p$ & $\equiv$ & $ p$                                      \\
+                                        & $p\wedge p$ & $\equiv$ & $ p$                                    \\
+       \alert{Assoziativität (Ass.)}    & $(p\vee q)\vee r $ & $\equiv$ & $ p\vee (q\vee r)$               \\
+                                        & $(p\wedge q)\wedge r $ & $\equiv$ & $ p\wedge (q\wedge r)$       \\
+       \alert{Kommutativität (Komm.)}   & $p\vee q $ & $\equiv$ & $ q\vee p$                               \\
+                                        & $p\wedge q $ & $\equiv$ & $ q\wedge p$                           \\
+       \alert{Distributivität (Distr.)} & $p\vee(q\wedge r) $ & $\equiv$ & $ (p\vee q)\wedge(p\vee r)$     \\
+                                        & $p\wedge(q\vee r) $ & $\equiv$ & $ (p\wedge q)\vee(p\wedge r)$   \\
+       \alert{DeMorgan (DeM)}           & $\neg(p\vee q)$ & $\equiv$ & $\neg p\wedge\neg q$                \\
+                                        & $\neg(p\wedge q)$ & $\equiv$ & $\neg p\vee\neg q$                \\
+    \end{tabular}
+
+    \vspace{-0.5\baselineskip}
+
+\section{Komplementgesetze}
+ 
+  \begin{tabular}[h]{p{0.4\textwidth}p{0.2\textwidth}cl}
+       \alert{Tautologie (Taut.)}       & $p\vee\neg p$ & $\equiv$ & \textbf{T}   \\
+       \alert{Kontradiktion (Kont.)}    & $p\wedge\neg p$ & $\equiv$ & \textbf{F} \\
+       \alert{Doppelnegation (DN)}      & $\neg\neg p$ & $\equiv$ & $ p$            \\
+    \end{tabular}
+
+    \vspace{-0.5\baselineskip}
+
+\section{Konditionalgesetze}
+
+    \begin{tabular}[h]{p{0.4\textwidth}p{0.2\textwidth}cl}
+      \textbf{Implikation (Impl.)}      & $p$ $\rightarrow$ $q$ & $\equiv$ & $\neg$ $p$ $\vee$ $q$ \\
+      \textbf{Kontraposition (Kontr.)}  & $p$ $\rightarrow$ $q$ & $\equiv$ & $\neg$ $q$ $\rightarrow$ $\neg$ $p$ \\
+    \end{tabular}
+
+    \vspace{-0.5\baselineskip}
+
+\section{Kombinatorische Schlussregeln}
+
+    \begin{tabular}[h]{p{0.4\textwidth}p{0.2\textwidth}cl}
+      \textbf{Simplifikation (Simp.)}          & $p\wedge q$              & $\vdash$ & $p,q$ \\
+      \textbf{Konjunktion (Kon.)}              & $p,q$                    & $\vdash$ & $p\wedge q$ \\
+      \textbf{Addition (Add.) / Disjunktion (Dis.)} & $p$                      & $\vdash$ & $p\vee q$ \\
+    \end{tabular}
+
+    \vspace{-0.5\baselineskip}
+
+\section{Eigentliche Schlussregeln}
+
+    \begin{tabular}[h]{p{0.4\textwidth}p{0.2\textwidth}cl}
+      \textbf{Modus Ponens (MP)}               & $p\rightarrow q, p$              & $\vdash$ & $q$ \\
+      \textbf{Modus Tollens (MT)}              & $p\rightarrow q, \neg q$         & $\vdash$ & $\neg p$ \\
+      \textbf{Hypothetischer Syllogismus (HS)} & $p\rightarrow q, q\rightarrow r$ & $\vdash$ & $p\rightarrow r$ \\
+      \textbf{Disjunktiver Syllogismus (DS)}   & $p\vee q, \neg p$                & $\vdash$ & $q$  \\
+                                               & $p\vee q, \neg q$                & $\vdash$ & $p$ \\
+    \end{tabular}
+
+    \vspace{-0.5\baselineskip}
+
+\section{Äquivalenzregeln für Quantoren}
+
+    \begin{tabular}[h]{p{0.4\textwidth}p{0.2\textwidth}cl}
+      \textbf{Quantorennegation (QN)}  & $\neg\forall x.Px$ & $\equiv$ & $\exists x.\neg Px$ \\
+      \textbf{}  & $\neg\exists x.Px$      & $\equiv$ & $\forall x.\neg Px$ \\
+      \textbf{}  & $\neg\forall x.\neg Px$ & $\equiv$ & $\exists x.Px$ \\
+      \textbf{}  & $\neg\exists x.\neg Px$ & $\equiv$ & $\forall x.Px$ \\
+      \textbf{Quantorendistribution (QD) }  & $\forall x[P(x)\wedge Q(x)]$ & $\equiv$ & $\forall x.P(x)\wedge\forall x.Q(x)$ \\
+      \textbf{}                             & $\exists x[P(x)\vee Q(x)]$   & $\equiv$ & $\exists x.P(x)\vee\exists x.Q(x)$ \\
+      \textbf{Quantorenbewegung (QM)}       &&& \\
+      \textbf{---\ Aus dem Antezendens einer Implikation} & $\exists x.P(x)\rightarrow\phi$ & $\equiv$ & $\forall x[P(x)\rightarrow\phi]$\\
+                                            & $\forall x.P(x)\rightarrow\phi$ & $\equiv$ & $\exists x[P(x)\rightarrow\phi]$ \\
+      \textbf{---\ Andernfalls} & $\exists x.P(x)\rightarrow\exists y.F(y)$ & $\equiv$ & $\forall x.\exists y[P(x)\rightarrow F(x)]$ \\
+                           & $S(m)\vee \exists x.P(x)$ & $\equiv$ & $\exists x[S(m)\vee P(x)]$ \\
+    \end{tabular}
+
+    \vspace{-0.5\baselineskip}
+
+\section{Schlussregeln für Quantoren}
+
+    \begin{tabular}[h]{p{0.4\textwidth}p{0.2\textwidth}cl}
+      \textbf{Universelle Instantiierung ($-\forall$)}  & $\forall x.P(x)$ & $\vdash$ & $(Pa)$ \\
+      \textbf{Universelle Generalisierung ($+\forall$)} &      &&   \\
+      \textbf{---\ Bedingung: $a$ wurde durch $-\forall$ eingeführt.} & $P(a)$ & $\vdash$ & $\forall x.P(x)$\\
+      \textbf{Existentielle Generalisierung ($-\exists$)} &&& \\
+      \textbf{---\ Bedingung: $x$ ist unbelegt.} &  $P(a)$    & $\vdash$ & $\exists x.P(x)$ \\
+      \textbf{Existentielle Instantiierung ($+\exists$)} &&& \\
+      \textbf{---\ Bedingung: $a$ ist unbelegt.}  & $\exists x.P(x)$     & $\vdash$ & $P(a)$ \\
+    \end{tabular}
+
+
+\end{document}

@@ -58,7 +58,7 @@ $(OUTDIR)/%$(SLIDESUFF)$(PROJECT)$(SUFFSUFF): $(MAINS) $(SOURCEDIR)%.tex $(OUTDI
 
 # Phony shit.
 
-.PHONY: full handout01 handout02 handout03 handout04 handout05 slides01 slides02 slides03 slides04 slides05 allhandouts allslides all clean realclean edit test
+.PHONY: full handout01 handout02 handout03 handout04 handout05 handout06 slides01 slides02 slides03 slides04 slides05 slides06 allhandouts allslides all clean realclean edit test
 
 test:
 	echo $(OUTDIR)/$(PROJECT)$(HANDOUTSUFF)$(FULL)$(BIBSUFF)
@@ -71,16 +71,18 @@ handout02: $(OUTDIR)/02.+Mengen+und+Funktionen$(HANDOUTSUFF)$(PROJECT)$(SUFFSUFF
 handout03: $(OUTDIR)/03.+Aussagenlogik$(HANDOUTSUFF)$(PROJECT)$(SUFFSUFF)
 handout04: $(OUTDIR)/04.+Pr-adikatenlogik$(HANDOUTSUFF)$(PROJECT)$(SUFFSUFF)
 handout05: $(OUTDIR)/05.+Typen+und+Lambdas$(HANDOUTSUFF)$(PROJECT)$(SUFFSUFF)
+handout06: $(OUTDIR)/06.+Intensionalit-at$(HANDOUTSUFF)$(PROJECT)$(SUFFSUFF)
 
-allhandouts: handout01 handout02 handout03 handout04 handout05
+allhandouts: handout01 handout02 handout03 handout04 handout05 handout06
 
 slides01: $(OUTDIR)/01.+Inferenz+und+Bedeutung$(SLIDESUFF)$(PROJECT)$(SUFFSUFF)
 slides02: $(OUTDIR)/02.+Mengen+und+Funktionen$(SLIDESUFF)$(PROJECT)$(SUFFSUFF)
 slides03: $(OUTDIR)/03.+Aussagenlogik$(SLIDESUFF)$(PROJECT)$(SUFFSUFF)
 slides04: $(OUTDIR)/04.+Pr-adikatenlogik$(SLIDESUFF)$(PROJECT)$(SUFFSUFF)
 slides05: $(OUTDIR)/05.+Typen+und+Lambdas$(SLIDESUFF)$(PROJECT)$(SUFFSUFF)
+slides06: $(OUTDIR)/06.+Intensionalit-at$(SLIDESUFF)$(PROJECT)$(SUFFSUFF)
 
-allslides: slides01 slides02 slides03 slides04 slides05
+allslides: slides01 slides02 slides03 slides04 slides05 slides06
 
 complete: $(OUTDIR)/$(PROJECT)$(HANDOUTSUFF)$(FULL)$(SUFFSUFF)
 
